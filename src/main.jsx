@@ -12,6 +12,7 @@ import {
 import Login from './pages/Login/Login.jsx';
 import Register from './pages/Register/Register.jsx';
 import Home from './pages/Home/Home.jsx';
+import ServiceDetails from './pages/ServiceDetails/ServiceDetails.jsx';
 
 
 const router = createBrowserRouter([
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register />,
+      },
+      {
+        path: "/service-details/:id",
+        element: <ServiceDetails />,
       },
     ],
   },

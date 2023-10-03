@@ -6,7 +6,7 @@ const Filters = ({displayFilter, setDisplayFilter }) => {
         <div className='my-5 lg:my-3 md:my-10'>
             {
                displayFilter &&
-               <div className='bg-blue-400 w-44 md:w-48 lg:w-52 h-[500px] mb-96'>
+               <div className=' border-r-2 border-gray-300 shadow-lg w-44 md:w-48 lg:w-52 h-full mb-96'>
 
                 <div className='text-4xl flex justify-end'>
                     <button onClick={() => setDisplayFilter(false)}><AiOutlineCloseSquare /></button>

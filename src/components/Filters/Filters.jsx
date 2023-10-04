@@ -2,6 +2,7 @@ import React from 'react';
 import { AiOutlineCloseSquare } from "react-icons/ai";
 
 const Filters = ({displayFilter, setDisplayFilter }) => {
+
     return (
         <div className='my-5 lg:my-3 md:my-10'>
             {

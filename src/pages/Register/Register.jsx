@@ -95,12 +95,12 @@ const Register = () => {
                     />
                 </div>
                 <div className="mb-4">
-                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full" type="submit">
+                    <button className="bg-red-900 hover:bg-red-950 text-white font-bold py-2 px-4 rounded w-full" type="submit">
                         Register
                     </button>
                 </div>
                 <div className="text-center">
-                    <small className="text-gray-500">Already have an account?{" "}<Link to='/login' className="text-blue-600">Login</Link></small>
+                    <small className="text-gray-500">Already have an account?{" "}<Link to='/login' className="text-red-900">Login</Link></small>
                 </div>
             </form>
         </div>

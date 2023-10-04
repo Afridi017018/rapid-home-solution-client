@@ -71,12 +71,12 @@ const Login = () => {
                     />
                 </div>
                 <div className="mb-4">
-                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full" type="submit">
+                    <button className="bg-red-900 hover:bg-red-950 text-white font-bold py-2 px-4 rounded w-full" type="submit">
                         Login
                     </button>
                 </div>
                 <div className="text-center">
-                    <small className="text-gray-500">Don't have an account?{" "}<Link to='/register' className="text-blue-600">Register</Link> </small>
+                    <small className="text-gray-500">Don't have an account?{" "}<Link to='/register' className="text-red-900">Register</Link> </small>
                 </div>
             </form>
         </div>

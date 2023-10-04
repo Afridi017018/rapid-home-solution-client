@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getServiceById } from '../../apiCalls/services';
+import Faq from '../../components/Faq/Faq';
 
 const ServiceDetails = () => {
 
@@ -62,11 +63,12 @@ const ServiceDetails = () => {
                         </div>
 
                         <hr className='my-5' />
-
+           
 
                         <div>
                             <h2 className='text-2xl text-red-900 font-bold mb-3'>FAQ</h2>
-                            <p className='text-gray-500 text-lg font-medium'>Coming soon ...</p>
+                            {/* <p className='text-gray-500 text-lg font-medium'>Coming soon ...</p> */}
+                            <Faq />
                         </div>
 
 

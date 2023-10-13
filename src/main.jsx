@@ -13,7 +13,14 @@ import Login from './pages/Login/Login.jsx';
 import Register from './pages/Register/Register.jsx';
 import Home from './pages/Home/Home.jsx';
 import ServiceDetails from './pages/ServiceDetails/ServiceDetails.jsx';
+import Test from './pages/Test/Test.jsx';
 
+
+///
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+import Cart from './pages/Cart/Cart.jsx';
+// const stripePromise = loadStripe(`pk_test_51NxsVnLDN7M5wmwbD25KOthKGcCIboO8nzde202QJWvKeb55zHfb70SehpOVnB3mL9PtR3VEvalwWMtPxOMCpCW000Iyq1CBCV`);
 
 const router = createBrowserRouter([
   {
@@ -42,7 +49,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/cart",
-        element: <div>This is Cart</div>,
+        element: <Cart />,
       },
       {
         path: "/orders",
@@ -50,7 +57,16 @@ const router = createBrowserRouter([
       },
       {
         path: "/job",
-        element: <div>This is Job section</div>,
+        // element: <Elements stripe={stripePromise}><Test /></Elements>,
+        element: <div>hiiiiiiiiiiiiii</div>,
+      },
+      {
+        path: "/success",
+        element: <div>Order success!!!!!!!</div>,
+      },
+      {
+        path: "/cancel",
+        element: <div>Order Cancel  !!!!!!!</div>,
       },
     ],
   },

@@ -1,7 +1,8 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+import { getFaq } from '../../apiCalls/faq';
 
-import { getFaq } from '../../apiCalls/services';
+
 
 const Faq = () => {
     const [faq, setFaq] = useState([]);

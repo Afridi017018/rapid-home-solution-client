@@ -2,6 +2,8 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { addToCart } from '../../apiCalls/cart';
 import { getServiceById } from '../../apiCalls/services';
 import Faq from '../../components/Faq/Faq';
 
@@ -15,7 +17,7 @@ const ServiceDetails = () => {
         const singleService = async () => {
             const data = await getServiceById(id);
             setService(data.service)
-    
+
         }
 
         singleService();
@@ -23,15 +25,35 @@ const ServiceDetails = () => {
     }, [id])
 
 
+    const handleAddToCart = async (serviceId) => {
+        const data = await addToCart({ serviceId, userId: "65144e8a01dc79aa3134605d" });
+
+        if (data.success) {
+            toast.dismiss();
+            toast.success(data.message)
+        }
+
+        else {
+            toast.error(data.message);
+        }
+    }
+
+
     return (
         <div>
 
             {
-                service  &&
+                service &&
 
                 <div className='grid lg:grid-cols-2 gap-10 container px-5 lg:mx-auto my-10'>
                     <div>
-                        <img className='h-[400px] w-full rounded-md shadow-2xl' src="https://img.freepik.com/premium-photo/technician-man-repairing-cleaning-maintenance-air-conditioner_101276-183.jpg?w=740" alt="" />
+                        <div>
+                            <img className='h-[400px] w-full rounded-t-md shadow-2xl' src="https://img.freepik.com/premium-photo/technician-man-repairing-cleaning-maintenance-air-conditioner_101276-183.jpg?w=740" alt="" />
+                        </div>
+                        <div className='text-center bg-gray-300 rounded-b-md'>
+
+                            <button onClick={() => handleAddToCart(service._id)} className='bg-red-900 hover:bg-red-950 text-white px-3 py-1 rounded-md text-xl font-semibold my-2'>Add To Cart</button>
+                        </div>
                     </div>
 
                     <div>
@@ -52,7 +74,12 @@ const ServiceDetails = () => {
 
                                 <div className='flex justify-between mb-2'>
                                     <p>Duration</p>
-                                    <p>{service.duration} hrs</p>
+                                    <p>{service.duration} hours</p>
+                                </div>
+
+                                <div className='flex justify-between mb-2'>
+                                    <p>Warranty</p>
+                                    <p>7 days</p>
                                 </div>
 
                                 <div className='flex justify-between mb-2'>
@@ -63,7 +90,7 @@ const ServiceDetails = () => {
                         </div>
 
                         <hr className='my-5' />
-           
+
 
                         <div>
                             <h2 className='text-2xl text-red-900 font-bold mb-3'>FAQ</h2>

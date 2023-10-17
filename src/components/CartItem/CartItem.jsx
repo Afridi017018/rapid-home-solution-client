@@ -1,6 +1,14 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const CartItem = ({element}) => {
+
+    const navigate = useNavigate()
+
+    const handlePayment = (id)=>{
+        navigate(`/paymentInfo/${id}`);
+    }
+
     return (
         <div className='px-5 md:px-20 my-5'>
             <div className='flex h-56 bg-red-50 border border-gray-300 rounded-md shadow-xl'>
@@ -17,7 +25,7 @@ const CartItem = ({element}) => {
                     <hr />
 
                     <div className='flex gap-5 justify-center my-3 text-sm md:text-base'>
-                        <button className='bg-green-700 hover:bg-green-800 text-white px-2 md:px-3 py-1 rounded-md'>Proceed To Payment</button>
+                        <button onClick={()=>handlePayment(element.serviceId._id)} className='bg-green-700 hover:bg-green-800 text-white px-2 md:px-3 py-1 rounded-md'>Proceed To Payment</button>
                         <button className='bg-red-700 hover:bg-red-800 text-white px-2 py-1 rounded-md'>Remove</button>
                     </div>
 

@@ -1,38 +1,37 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import {userLogin} from '../../apiCalls/users'
+import { userLogin } from '../../apiCalls/users'
 
 
 
 
 const Login = () => {
 
-    const handleLoginSubmit = async (e)=>{
+    const handleLoginSubmit = async (e) => {
         e.preventDefault();
-        
-   
-        const {email, password} = e.target;
-        
+
+
+        const { email, password } = e.target;
+
         const user = {
             email: email.value,
             password: password.value
         }
         userLogin
-        
-      const data = await userLogin(user);
+
+        const data = await userLogin(user);
 
         toast.dismiss();
-        if(data.success)
-        {
+        if (data.success) {
             localStorage.setItem("token", data.token)
-            toast.success(data.message); 
+            toast.success(data.message);
         }
 
-        else{
+        else {
             toast.error(data.message);
         }
-        
+
 
 
     }
@@ -40,9 +39,9 @@ const Login = () => {
     return (
         <div className="flex justify-center items-center h-screen bg-red-50">
             <form className="w-full max-w-sm bg-white shadow-customShadow rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleLoginSubmit}>
-                
-            <h1 className="font-bold text-2xl mb-2 text-gray-600">Login</h1>
-                <hr className="mb-3"/>
+
+                <h1 className="font-bold text-2xl mb-2 text-gray-600">Login</h1>
+                <hr className="mb-3" />
 
                 <div className="mb-4">
                     <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">

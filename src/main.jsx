@@ -20,7 +20,9 @@ import Test from './pages/Test/Test.jsx';
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import Cart from './pages/Cart/Cart.jsx';
-// const stripePromise = loadStripe(`pk_test_51NxsVnLDN7M5wmwbD25KOthKGcCIboO8nzde202QJWvKeb55zHfb70SehpOVnB3mL9PtR3VEvalwWMtPxOMCpCW000Iyq1CBCV`);
+import Payment from './pages/Payment/Payment.jsx';
+const stripePromise = loadStripe(`pk_test_51NxsVnLDN7M5wmwbD25KOthKGcCIboO8nzde202QJWvKeb55zHfb70SehpOVnB3mL9PtR3VEvalwWMtPxOMCpCW000Iyq1CBCV`);
+
 
 const router = createBrowserRouter([
   {
@@ -57,9 +59,19 @@ const router = createBrowserRouter([
       },
       {
         path: "/job",
-        // element: <Elements stripe={stripePromise}><Test /></Elements>,
-        element: <div>hiiiiiiiiiiiiii</div>,
+        element: <Elements stripe={stripePromise} ><Test /></Elements>,
+        // element: <div>hiiiiiiiiiiiiii</div>,
       },
+      {
+        path: "/paymentInfo/:id",
+        element: <Elements stripe={stripePromise} ><Payment /></Elements>,
+        // element: <div>hiiiiiiiiiiiiii</div>,
+      },
+      // {
+      //   path: "/payment/:id",
+      //   element: <Payment />,
+      //   // element: <div>hiiiiiiiiiiiiii</div>,
+      // },
       {
         path: "/success",
         element: <div>Order success!!!!!!!</div>,

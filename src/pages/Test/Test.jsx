@@ -82,40 +82,45 @@ import {
   CardExpiryElement,
   CardCvcElement,
   useStripe,
-  useElements
+  useElements,
+  // CardElement
+
 } from "@stripe/react-stripe-js";
 import axios from "axios";
+import "./Test.css"
 const Test = () => {
 
-  // const stripe = useStripe();
-  // const elements = useElements();
-  // const handlePayment = async () => {
-  //   event.preventDefault();
-  //   const response = await axios.post(
-  //     'http://localhost:4000/api/services/create-payment-intent', { amount: 606 * 100, currency: "bdt" }
-  //   );
-  //   console.log(response.data)
-  //   if (response.status === 200) {
-  //     const confirmPayment = await stripe.confirmCardPayment(
-  //       response.data,
-  //       {
-  //         payment_method: {
-  //           card: elements.getElement(CardNumberElement),
-  //         },
-  //       }
-  //     );
-  //     if (confirmPayment.paymentIntent.status === "succeeded") {
-  //       console.log('payment confirmed');
-  //       await axios.post('http://localhost:4000/api/services/save-payment', { paymentIntentId: confirmPayment.paymentIntent.id });
-  //     }
-  //   }
-  // }
+  const stripe = useStripe();
+  const elements = useElements();
+  const handlePayment = async () => {
+    event.preventDefault();
+    const response = await axios.post(
+      'http://localhost:4000/api/services/create-payment-intent', { amount: 606 * 100, currency: "bdt" }
+    );
+    console.log(response.data)
+    if (response.status === 200) {
+      const confirmPayment = await stripe.confirmCardPayment(
+        response.data,
+        {
+          payment_method: {
+            card: elements.getElement(CardNumberElement),
+          },
+        }
+      );
+      if (confirmPayment.paymentIntent.status === "succeeded") {
+        console.log('payment confirmed');
+        await axios.post('http://localhost:4000/api/services/save-payment', { paymentIntentId: confirmPayment.paymentIntent.id });
+      }
+    }
+  }
   return (
     <form onSubmit={handlePayment}>
-      {/* <CardNumberElement />
+      <CardNumberElement/>
       <CardExpiryElement />
       <CardCvcElement />
-      <button>Confirm Payment</button> */}
+
+   
+      <button>Confirm Payment</button>
     </form>
   )
 }

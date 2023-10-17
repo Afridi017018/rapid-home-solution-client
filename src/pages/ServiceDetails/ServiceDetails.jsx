@@ -26,7 +26,7 @@ const ServiceDetails = () => {
 
 
     const handleAddToCart = async (serviceId) => {
-        const data = await addToCart({ serviceId, userId: "65144e8a01dc79aa3134605d" });
+        const data = await addToCart({ serviceId, userId: "652cc4f5f3c3167a19f8ec15" });
 
         if (data.success) {
             toast.dismiss();
@@ -50,7 +50,7 @@ const ServiceDetails = () => {
                         <div>
                             <img className='h-[400px] w-full rounded-t-md shadow-2xl' src="https://img.freepik.com/premium-photo/technician-man-repairing-cleaning-maintenance-air-conditioner_101276-183.jpg?w=740" alt="" />
                         </div>
-                        <div className='text-center bg-gray-300 rounded-b-md'>
+                        <div className='text-center bg-red-300 rounded-b-md'>
 
                             <button onClick={() => handleAddToCart(service._id)} className='bg-red-900 hover:bg-red-950 text-white px-3 py-1 rounded-md text-xl font-semibold my-2'>Add To Cart</button>
                         </div>

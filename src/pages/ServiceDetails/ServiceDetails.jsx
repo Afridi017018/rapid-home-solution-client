@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { addToCart } from '../../apiCalls/cart';
 import { getServiceById } from '../../apiCalls/services';
+import Comments from '../../components/Comments/Comments';
 import Faq from '../../components/Faq/Faq';
 
 const ServiceDetails = () => {
@@ -53,6 +54,10 @@ const ServiceDetails = () => {
                         <div className='text-center bg-red-300 rounded-b-md'>
 
                             <button onClick={() => handleAddToCart(service._id)} className='bg-red-900 hover:bg-red-950 text-white px-3 py-1 rounded-md text-xl font-semibold my-2'>Add To Cart</button>
+                        </div>
+
+                        <div>
+                            <Comments />
                         </div>
                     </div>
 

@@ -94,7 +94,7 @@ const PaymentInfo = () => {
                 }
             </div>
 
-            <div className="border border-gray-100 shadow-2xl px-5 py-5 w-3/4 rounded  mt-5">
+            <div className="border border-gray-100 shadow-2xl px-5 py-5 w-3/4 rounded mt-1">
 
                 <div className="text-4xl flex justify-center">
                     <LiaCcVisa />

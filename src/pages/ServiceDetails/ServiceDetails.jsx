@@ -57,7 +57,7 @@ const ServiceDetails = () => {
                         </div>
 
                         <div>
-                            <Comments />
+                            <Comments serviceId={service._id} />
                         </div>
                     </div>
 

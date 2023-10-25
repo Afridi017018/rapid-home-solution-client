@@ -51,7 +51,7 @@ const Comments = ({serviceId}) => {
                         :
 
                         <div className='text-center font-bold text-gray-500 my-5'>
-                            <h2>No comments have been made yet</h2>
+                            <h2>No comment has been made yet</h2>
                         </div>
                 }
             </div>

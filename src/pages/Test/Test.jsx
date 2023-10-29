@@ -77,53 +77,85 @@
 
 
 
-import {
-  CardNumberElement,
-  CardExpiryElement,
-  CardCvcElement,
-  useStripe,
-  useElements,
-  // CardElement
+// import {
+//   CardNumberElement,
+//   CardExpiryElement,
+//   CardCvcElement,
+//   useStripe,
+//   useElements,
+//   // CardElement
 
-} from "@stripe/react-stripe-js";
-import axios from "axios";
-import "./Test.css"
-const Test = () => {
+// } from "@stripe/react-stripe-js";
+// import axios from "axios";
+// import "./Test.css"
+// const Test = () => {
 
-  const stripe = useStripe();
-  const elements = useElements();
-  const handlePayment = async () => {
-    event.preventDefault();
-    const response = await axios.post(
-      'http://localhost:4000/api/services/create-payment-intent', { amount: 606 * 100, currency: "bdt" }
-    );
-    console.log(response.data)
-    if (response.status === 200) {
-      const confirmPayment = await stripe.confirmCardPayment(
-        response.data,
-        {
-          payment_method: {
-            card: elements.getElement(CardNumberElement),
-          },
-        }
-      );
-      if (confirmPayment.paymentIntent.status === "succeeded") {
-        console.log('payment confirmed');
-        await axios.post('http://localhost:4000/api/services/save-payment', { paymentIntentId: confirmPayment.paymentIntent.id });
-      }
-    }
-  }
-  return (
-    <form onSubmit={handlePayment}>
-      <CardNumberElement/>
-      <CardExpiryElement />
-      <CardCvcElement />
+//   const stripe = useStripe();
+//   const elements = useElements();
+//   const handlePayment = async () => {
+//     event.preventDefault();
+//     const response = await axios.post(
+//       'http://localhost:4000/api/services/create-payment-intent', { amount: 606 * 100, currency: "bdt" }
+//     );
+//     console.log(response.data)
+//     if (response.status === 200) {
+//       const confirmPayment = await stripe.confirmCardPayment(
+//         response.data,
+//         {
+//           payment_method: {
+//             card: elements.getElement(CardNumberElement),
+//           },
+//         }
+//       );
+//       if (confirmPayment.paymentIntent.status === "succeeded") {
+//         console.log('payment confirmed');
+//         await axios.post('http://localhost:4000/api/services/save-payment', { paymentIntentId: confirmPayment.paymentIntent.id });
+//       }
+//     }
+//   }
+//   return (
+//     <form onSubmit={handlePayment}>
+//       <CardNumberElement/>
+//       <CardExpiryElement />
+//       <CardCvcElement />
 
    
-      <button>Confirm Payment</button>
-    </form>
-  )
-}
+//       <button>Confirm Payment</button>
+//     </form>
+//   )
+// }
 
+
+// export default Test;
+
+
+
+import React, { useState } from 'react';
+
+function Test() {
+  const [rating, setRating] = useState(0);
+
+  const handleRatingChange = (newRating) => {
+    setRating(newRating);
+    console.log(newRating)
+  };
+
+  return (
+    <div>
+      <p>Selected Rating: {rating}</p>
+      <div>
+        {[1, 2, 3, 4, 5].map((star) => (
+          <button
+            key={star}
+            onClick={() => handleRatingChange(star)}
+            className = {`${ star <= rating ? 'text-orange-500' : 'text-gray-500' }`}
+          >
+            ★
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 export default Test;

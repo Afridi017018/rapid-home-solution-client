@@ -25,7 +25,7 @@ const PaymentInfo = () => {
         const getService = async () => {
             const data = await getServiceById(serviceId.id);
             setCheckOutService([data.service]);
-            console.log([data.service][0]);
+            // console.log([data.service][0]);
         }
 
         getService();
@@ -35,7 +35,7 @@ const PaymentInfo = () => {
         event.preventDefault();
 
         try {
-            const response = await fetch('http://localhost:4000/api/services/create-payment-intent', {
+            const response = await fetch('http://localhost:4000/api/orders/create-payment-intent', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -56,12 +56,18 @@ const PaymentInfo = () => {
 
                 if (confirmPayment.paymentIntent.status === "succeeded") {
                     console.log('Payment confirmed');
-                    await fetch('http://localhost:4000/api/services/save-payment', {
+                    const obj = {
+                        userId: "652cc4f5f3c3167a19f8ec15",
+                        serviceId: serviceId.id,
+                        paymentIntentId: confirmPayment.paymentIntent.id,
+                        amount: checkOutService[0].price
+                    }
+                    await fetch('http://localhost:4000/api/orders/save-order', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
                         },
-                        body: JSON.stringify({ paymentIntentId: confirmPayment.paymentIntent.id }),
+                        body: JSON.stringify(obj),
                     });
                 }
             }
@@ -69,6 +75,12 @@ const PaymentInfo = () => {
             console.error(error);
         }
     };
+
+
+
+
+
+
 
     return (
         <div className="mx-10 my-10">

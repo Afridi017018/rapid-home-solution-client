@@ -32,11 +32,12 @@ const userLogin = async (user)=>{
 
 
 
-const getUser = async(userId)=>{
-    const response = await fetch(`http://localhost:4000/api/user/get-user/${userId}`,{
+const getUser = async()=>{
+    const response = await fetch(`http://localhost:4000/api/user/get-user`,{
         method:'GET',
         headers:{
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'authorization': `Bearer ${localStorage.getItem('token')}`
         },
         // body: JSON.stringify(user)
 

@@ -79,7 +79,7 @@ const OrderTable = () => {
                                                                     <button
                                                                         key={star}
                                                                         onClick={() => handleRatingChange(element._id, star)}
-                                                                        className={`text-xl ${star <= orders[index].rate ? 'text-orange-500' : 'text-gray-500'}`}
+                                                                        className={`lg:text-xl ${star <= orders[index].rate ? 'text-orange-500' : 'text-gray-500'}`}
                                                                     >
                                                                         ★
 

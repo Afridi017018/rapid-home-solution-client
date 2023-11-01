@@ -1,22 +1,26 @@
 import React from 'react';
+import { useContext } from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { getUser } from '../../apiCalls/users';
+import { AuthContext } from '../providers/AuthProvider';
 
 const UserAddress = () => {
 
-    const [userInfo, setUserInfo] = useState([]);
+    const {user} = useContext(AuthContext);
 
-    useEffect(()=>{
+    // const [userInfo, setUserInfo] = useState([]);
+
+    // useEffect(()=>{
         
-        const getUserInfo = async()=>{
-            const data = await getUser("652cc4f5f3c3167a19f8ec15");
-            setUserInfo(data.userData);
-        }
+    //     const getUserInfo = async()=>{
+    //         const data = await getUser("652cc4f5f3c3167a19f8ec15");
+    //         setUserInfo(data.userData);
+    //     }
 
-        getUserInfo();
+    //     getUserInfo();
 
-    },[])
+    // },[])
     
 
 
@@ -26,25 +30,25 @@ const UserAddress = () => {
                 Shipping Address
             </div>
            {
-              userInfo.length > 0 &&
+              user.length > 0 &&
 
               <div className='text-gray-500 bg-red-50'>
                 <div className='border border-gray-100 rounded px-5 shadow-2xl py-5'>
-              <h2 className='text-xl font-medium my-2'>Name : {userInfo[0].name}</h2>
+              <h2 className='text-xl font-medium my-2'>Name : {user[0].name}</h2>
               <hr className='w-4/5' />
-              <h2 className='text-xl font-medium my-2'>Email : {userInfo[0].email}</h2>
+              <h2 className='text-xl font-medium my-2'>Email : {user[0].email}</h2>
               <hr className='w-4/5' />
-              <h2 className='text-xl font-medium my-2'>Phone : {userInfo[0].phone}</h2>
+              <h2 className='text-xl font-medium my-2'>Phone : {user[0].phone}</h2>
               <hr className='w-4/5' />
-              <h2 className='text-xl font-medium my-2'>Region : {userInfo[0].region}</h2>
+              <h2 className='text-xl font-medium my-2'>Region : {user[0].region}</h2>
               <hr className='w-4/5' />
-              <h2 className='text-xl font-medium my-2'>City : {userInfo[0].city}</h2>
+              <h2 className='text-xl font-medium my-2'>City : {user[0].city}</h2>
               <hr className='w-4/5' />
-              <h2 className='text-xl font-medium my-2'>Area : {userInfo[0].area}</h2>
+              <h2 className='text-xl font-medium my-2'>Area : {user[0].area}</h2>
               <hr className='w-4/5' />
-              <h2 className='text-xl font-medium my-2'>Country : {userInfo[0].country}</h2>
+              <h2 className='text-xl font-medium my-2'>Country : {user[0].country}</h2>
               <hr className='w-4/5' />
-              <h2 className='text-xl font-medium my-2'>Address: {userInfo[0].address}</h2>
+              <h2 className='text-xl font-medium my-2'>Address: {user[0].address}</h2>
             </div>
               </div>
            }

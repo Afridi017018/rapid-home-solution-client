@@ -1,7 +1,12 @@
 import React from 'react';
+import { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
+import { AuthContext } from '../providers/AuthProvider';
 
 const Navbar = () => {
+
+    const { user } = useContext(AuthContext)
+    console.log(user)
 
     const list = <div className='lg:flex text-lg font-semibold lg:gap-5'>
         <li><NavLink
@@ -77,7 +82,7 @@ const Navbar = () => {
                             }
                         </ul>
                     </div>
-                    <a className="btn btn-ghost normal-case text-xl">Logo</a>
+                    <a className="btn btn-ghost normal-case text-xl">{user[0]?.name}</a>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu-horizontal px-1">
@@ -87,24 +92,62 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <ul className='lg:flex text-lg font-semibold lg:gap-5'>
-                        <li><NavLink
-                            to="/login"
-                            className={({ isActive, isPending }) =>
-                                isPending ? "pending" : isActive ? "text-orange-400 underline" : ""
-                            }
-                        >
-                            Login
-                        </NavLink></li>
-                        <li><NavLink
-                            to="/register"
-                            className={({ isActive, isPending }) =>
-                                isPending ? "pending" : isActive ? "text-orange-400 underline" : ""
-                            }
-                        >
-                            Register
-                        </NavLink></li>
-                    </ul>
+
+                    {
+                        user.length > 0 ?
+
+
+
+                            <ul className='lg:flex text-lg font-semibold lg:gap-5'>
+                                <li><NavLink
+                                    to="/login"
+                                    className={({ isActive, isPending }) =>
+                                        isPending ? "pending" : isActive ? "text-orange-400 underline" : ""
+                                    }
+                                >
+                                    {user[0]?.name}
+                                </NavLink></li>
+                                <li><NavLink
+                                    to="/register"
+                                    className={({ isActive, isPending }) =>
+                                        isPending ? "pending" : isActive ? "text-orange-400 underline" : ""
+                                    }
+                                >
+                                    <button className='px-3 py-1 bg-red-600 rounded text-base'>Logout</button>
+                                </NavLink></li>
+                            </ul>
+
+                            :
+
+                            <ul className='lg:flex text-lg font-semibold lg:gap-5'>
+                                <li><NavLink
+                                    to="/login"
+                                    className={({ isActive, isPending }) =>
+                                        isPending ? "pending" : isActive ? "text-orange-400 underline" : ""
+                                    }
+                                >
+                                    Login
+                                </NavLink></li>
+                                <li><NavLink
+                                    to="/register"
+                                    className={({ isActive, isPending }) =>
+                                        isPending ? "pending" : isActive ? "text-orange-400 underline" : ""
+                                    }
+                                >
+                                    Register
+                                </NavLink></li>
+                            </ul>
+
+
+
+
+
+                    }
+
+
+
+
+
                 </div>
             </div>
 

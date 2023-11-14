@@ -11,9 +11,9 @@ const CartItem = ({element}) => {
 
     return (
         <div className='px-5 md:px-20 my-5'>
-            <div className='flex h-56 bg-red-50 border border-gray-300 rounded-md shadow-xl'>
+            <div className='flex h-56 w-full bg-red-50 border border-gray-300 rounded-md shadow-xl'>
                 <div>
-                    <img className='h-full w-full rounded-l-md' src="https://img.freepik.com/premium-photo/technician-man-repairing-cleaning-maintenance-air-conditioner_101276-183.jpg?w=740" alt="" />
+                    <img className='h-full w-44 md:w-96 rounded-l-md' src={element.serviceId.image[0].secure_url} alt="" />
                 </div>
                 <div className='rounded-r-md flex flex-col justify-center px-3 md:px-10 w-full'>
                     {/* <p className='bg-red-300 px-2 inline-block text-red-900 rounded'>AC</p> */}

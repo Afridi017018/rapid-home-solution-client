@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
+import {QueryClient,QueryClientProvider} from '@tanstack/react-query'
 
 
 
@@ -23,6 +24,11 @@ import Cart from './pages/Cart/Cart.jsx';
 import Payment from './pages/Payment/Payment.jsx';
 import Order from './pages/Order/Order.jsx';
 import AuthProvider from './components/providers/AuthProvider.jsx';
+import PrivateRoute from './PrivateRoute.jsx';
+import Layout from './admin/components/shared/Layout.jsx';
+import Dashboard from './admin/pages/Dashboard.jsx';
+import Services from './admin/pages/Services.jsx';
+
 const stripePromise = loadStripe(`pk_test_51NxsVnLDN7M5wmwbD25KOthKGcCIboO8nzde202QJWvKeb55zHfb70SehpOVnB3mL9PtR3VEvalwWMtPxOMCpCW000Iyq1CBCV`);
 
 
@@ -45,7 +51,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/service-details/:id",
-        element: <ServiceDetails />,
+        element: <PrivateRoute><ServiceDetails /></PrivateRoute>,
       },
       {
         path: "/quick-service",
@@ -53,11 +59,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/cart",
-        element: <Cart />,
+        element: <PrivateRoute><Cart /></PrivateRoute>,
       },
       {
         path: "/orders",
-        element: <Order />,
+        element: <PrivateRoute><Order /></PrivateRoute>,
       },
       {
         path: "/job",
@@ -66,7 +72,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/paymentInfo/:id",
-        element: <Elements stripe={stripePromise} ><Payment /></Elements>,
+        element: <PrivateRoute><Elements stripe={stripePromise} ><Payment /></Elements></PrivateRoute>,
         // element: <div>hiiiiiiiiiiiiii</div>,
       },
       // {
@@ -84,16 +90,40 @@ const router = createBrowserRouter([
       },
     ],
   },
+
+  {
+    path: "/admin",
+    element: <Layout />,
+    children: [
+      {
+        index: true,
+        element: <Dashboard />,
+      },
+      {
+        path: "services",
+        element: <Services />,
+      },
+    ]
+  }
 ]);
+
+
+
+
+
+
+const queryClient = new QueryClient()
 
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
 
-    <AuthProvider>
-      <RouterProvider router={router} />
-    </AuthProvider>
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
+    </QueryClientProvider>
 
   </React.StrictMode>,
 )

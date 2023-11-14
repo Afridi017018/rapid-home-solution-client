@@ -6,7 +6,7 @@ import { AuthContext } from '../providers/AuthProvider';
 const Navbar = () => {
 
     const { user } = useContext(AuthContext)
-    console.log(user)
+    // console.log(user)
 
     const list = <div className='lg:flex text-lg font-semibold lg:gap-5'>
         <li><NavLink
@@ -82,7 +82,7 @@ const Navbar = () => {
                             }
                         </ul>
                     </div>
-                    <a className="btn btn-ghost normal-case text-xl">{user[0]?.name}</a>
+                    <a className="btn btn-ghost normal-case text-xl">{user && user[0]?.name}</a>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu-horizontal px-1">
@@ -94,7 +94,7 @@ const Navbar = () => {
                 <div className="navbar-end">
 
                     {
-                        user.length > 0 ?
+                        user?.length > 0 ?
 
 
 

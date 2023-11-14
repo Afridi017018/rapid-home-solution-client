@@ -130,32 +130,46 @@
 
 
 
-import React, { useState } from 'react';
+// import React, { useState } from 'react';
 
-function Test() {
-  const [rating, setRating] = useState(0);
+// function Test() {
+//   const [rating, setRating] = useState(0);
 
-  const handleRatingChange = (newRating) => {
-    setRating(newRating);
-    console.log(newRating)
-  };
+//   const handleRatingChange = (newRating) => {
+//     setRating(newRating);
+//     console.log(newRating)
+//   };
 
+//   return (
+//     <div>
+//       <p>Selected Rating: {rating}</p>
+//       <div>
+//         {[1, 2, 3, 4, 5].map((star) => (
+//           <button
+//             key={star}
+//             onClick={() => handleRatingChange(star)}
+//             className = {`${ star <= rating ? 'text-orange-500' : 'text-gray-500' }`}
+//           >
+//             ★
+//           </button>
+//         ))}
+//       </div>
+//     </div>
+//   );
+// }
+
+// export default Test;
+
+
+
+import React from 'react';
+
+const Test = () => {
   return (
-    <div>
-      <p>Selected Rating: {rating}</p>
-      <div>
-        {[1, 2, 3, 4, 5].map((star) => (
-          <button
-            key={star}
-            onClick={() => handleRatingChange(star)}
-            className = {`${ star <= rating ? 'text-orange-500' : 'text-gray-500' }`}
-          >
-            ★
-          </button>
-        ))}
-      </div>
+    <div className='h-[570px] flex justify-center items-center'>
+      <span className="loading loading-spinner loading-lg"></span>
     </div>
   );
-}
+};
 
 export default Test;

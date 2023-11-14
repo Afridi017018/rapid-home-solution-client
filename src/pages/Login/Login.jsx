@@ -1,31 +1,53 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { userLogin } from '../../apiCalls/users'
+import { getUser, userLogin } from '../../apiCalls/users'
+import { AuthContext } from '../../components/providers/AuthProvider';
 
 
 
 
 const Login = () => {
+    const { setUser, setLoading } = useContext(AuthContext)
+    const location = useLocation();
+    const navigate = useNavigate();
+
 
     const handleLoginSubmit = async (e) => {
         e.preventDefault();
-
+        setLoading(true);
 
         const { email, password } = e.target;
 
-        const user = {
+        const userObj = {
             email: email.value,
             password: password.value
         }
-        userLogin
 
-        const data = await userLogin(user);
+
+        const data = await userLogin(userObj);
 
         toast.dismiss();
+
         if (data.success) {
             localStorage.setItem("token", data.token)
+
+            const getUserData = async () => {
+
+                const data = await getUser();
+                setUser(data.userData);
+                setLoading(false);
+
+
+            }
+
+            await getUserData();
             toast.success(data.message);
+
+            navigate(location.state ? location.state : "/")
+
+
         }
 
         else {

@@ -49,7 +49,7 @@ const ServiceDetails = () => {
                 <div className='grid lg:grid-cols-2 gap-10 container px-5 lg:mx-auto my-10'>
                     <div>
                         <div>
-                            <img className='h-[400px] w-full rounded-t-md shadow-2xl' src="https://img.freepik.com/premium-photo/technician-man-repairing-cleaning-maintenance-air-conditioner_101276-183.jpg?w=740" alt="" />
+                            <img className='h-[400px] w-full rounded-t-md shadow-2xl' src={service.image[0].secure_url} alt="" />
                         </div>
                         <div className='text-center bg-red-300 rounded-b-md'>
 

@@ -55,7 +55,7 @@ const OrderTable = () => {
                                     {orders.length > 0 &&
                                         orders.map((element, index) => (
                                             <tr key={element._id}>
-                                                <td><img className='h-10 w-14 rounded' src="https://img.freepik.com/premium-photo/technician-man-repairing-cleaning-maintenance-air-conditioner_101276-183.jpg?w=740" alt="" /></td>
+                                                <td><img className='h-10 w-14 rounded' src={element.serviceId.image[0].secure_url} alt="" /></td>
 
                                                 <td>{element.serviceId.title}</td>
                                                 <td>{element._id}</td>
@@ -64,9 +64,9 @@ const OrderTable = () => {
                                                 <td><p>Ordered: {moment(element.createdAt).format('DD/MM/YY, h:mm A')}</p>
                                                     {
                                                         element.servicedAt ?
-                                                        <p>Serviced: {moment(element.servicedAt).format('DD/MM/YY, h:mm A')}</p>
-                                                        :
-                                                        <p>Estimate: {moment(element.createdAt).add(4, 'day').format('DD/MM/YY')}</p>
+                                                            <p>Serviced: {moment(element.servicedAt).format('DD/MM/YY, h:mm A')}</p>
+                                                            :
+                                                            <p>Estimate: {moment(element.createdAt).add(4, 'day').format('DD/MM/YY')}</p>
                                                     }
                                                 </td>
 

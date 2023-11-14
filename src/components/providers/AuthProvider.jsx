@@ -6,37 +6,43 @@ import { getUser } from '../../apiCalls/users';
 
 export const AuthContext = createContext();
 
-const AuthProvider = ({children}) => {
+const AuthProvider = ({ children }) => {
 
     const [user, setUser] = useState([]);
     const [loading, setLoading] = useState(true);
+    
 
-    useEffect(()=>{
-         const getUserData = async ()=>{
+    useEffect(() => {
+
+        const getUserData = async () => {
+            // console.log("ami ar kiiiiiiiiiiiiiiii")
             const data = await getUser();
             setUser(data.userData);
-            // console.log(data.userData);
+            // console.log(data.success)
+            // if(data.success === true)
             setLoading(false);
-         }
 
-         getUserData();
-    },[])
+        }
+
+        getUserData();
+    }, [loading])
 
 
     const authInfo = {
-         user,
-         loading,
-         setLoading
+        user,
+        setUser,
+        loading,
+        setLoading,
     }
 
 
     return (
-       
+
         <AuthContext.Provider value={authInfo}>
             {children}
         </AuthContext.Provider>
-            
-       
+
+
     );
 };
 

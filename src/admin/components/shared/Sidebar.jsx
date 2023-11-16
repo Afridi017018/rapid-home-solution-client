@@ -1,15 +1,16 @@
 import React from 'react';
 import classNames from 'classnames';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FcHome } from 'react-icons/fc';
 import { DASHBOARD_SIDEBAR_LINKS } from '../../lib/constants';
 
 const Sidebar = () => {
   const { pathname } = useLocation();
+  const navigate = useNavigate();
 
   return (
     <div className="bg-neutral-900 p-3 flex flex-col">
-      <div className="flex items-center gap-2 px-1 py-3">
+      <div onClick={()=>navigate(`/`)} className="flex items-center gap-2 px-1 py-3 cursor-pointer">
         <FcHome fontSize={24} />
         <span className="text-neutral-200 text-lg">Rapid Home Solution</span>
       </div>

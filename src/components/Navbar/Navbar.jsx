@@ -82,7 +82,7 @@ const Navbar = () => {
                             }
                         </ul>
                     </div>
-                    <a className="btn btn-ghost normal-case text-xl">{user && user[0]?.name}</a>
+                    <div className="btn btn-ghost normal-case text-xl">Logo</div>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu-horizontal px-1">
@@ -100,13 +100,14 @@ const Navbar = () => {
 
                             <ul className='lg:flex text-lg font-semibold lg:gap-5'>
                                 <li><NavLink
-                                    to="/login"
+                                    to="/profile"
                                     className={({ isActive, isPending }) =>
                                         isPending ? "pending" : isActive ? "text-orange-400 underline" : ""
                                     }
                                 >
                                     {user[0]?.name}
                                 </NavLink></li>
+
                                 <li><NavLink
                                     to="/register"
                                     className={({ isActive, isPending }) =>

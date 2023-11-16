@@ -29,6 +29,7 @@ import Dashboard from './admin/pages/Dashboard.jsx';
 import Services from './admin/pages/Services.jsx';
 import Orders from './admin/pages/Orders.jsx'
 import Users from './admin/pages/Users.jsx'
+import Profile from './pages/Profile/Profile.jsx';
 
 const stripePromise = loadStripe(`pk_test_51NxsVnLDN7M5wmwbD25KOthKGcCIboO8nzde202QJWvKeb55zHfb70SehpOVnB3mL9PtR3VEvalwWMtPxOMCpCW000Iyq1CBCV`);
 
@@ -69,6 +70,11 @@ const router = createBrowserRouter([
       {
         path: "/job",
         element: <Elements stripe={stripePromise} ><Test /></Elements>,
+        // element: <div>hiiiiiiiiiiiiii</div>,
+      },
+      {
+        path: "/profile",
+        element: <Profile />,
         // element: <div>hiiiiiiiiiiiiii</div>,
       },
       {

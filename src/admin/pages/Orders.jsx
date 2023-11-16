@@ -1,27 +1,55 @@
 import React, { useState } from 'react';
-import { MdDeleteForever } from 'react-icons/md';
-import { GiConfirmed } from 'react-icons/gi';
+import { useEffect } from 'react';
+import { getAllOrders, updateOrderStatus } from '../../apiCalls/orders';
+import Loading from '../../pages/Loading/Loading';
+import moment from 'moment'
 
 const Orders = () => {
-  const [orders, setOrders] = useState([
-    { id: 1, serviceName: 'Cleaning', status: 'Pending', orderDate: '2023-10-01', amount: 50 },
-    { id: 2, serviceName: 'Plumbing', status: 'Pending', orderDate: '2023-10-02', amount: 70 },
-    { id: 3, serviceName: 'Electrical', status: 'Pending', orderDate: '2023-10-03', amount: 60 },
-  ]);
+  // const [isLoading, setIsLoading] = useState(true)
+  const [orders, setOrders] = useState([]);
 
-  const handleDeleteOrder = (id) => {
-    setOrders(orders.filter(order => order.id !== id));
-  };
 
-  const handleConfirmOrder = (id) => {
-    setOrders(orders.map(order => {
-      if (order.id === id) {
-        return  { ...order,  status: 'Confirmed'};
-        
-      }
-      return order;
-    }));
-  };
+
+  const getAllOrderData = async () => {
+    // setIsLoading(true);
+    const data = await getAllOrders();
+    // console.log(data.orders);
+    setOrders(data.orders)
+    // setIsLoading(false)
+  }
+
+  useEffect(() => {
+    getAllOrderData();
+  }, [])
+
+
+
+  // if(isLoading)
+  // {
+  //   return <Loading />
+  // }
+
+
+  const currentStatus = [
+    "pending",
+    "reviewing",
+    "on the way",
+    "serviced",
+    "canceled"
+  ]
+
+
+
+  const handleChangedStatus = async (orderId, status)=>{
+
+    // console.log(orderId,status);
+    const data = await updateOrderStatus({orderId, status});
+    // console.log(data);
+
+    getAllOrderData();
+    
+
+  }
 
   return (
     <div className="bg-white px-4 pt-3 pb-4 rounded-sm border border-gray-200 flex-1 overflow-x-auto">
@@ -40,27 +68,34 @@ const Orders = () => {
           </thead>
           <tbody>
             {orders.map(order => (
-              <tr key={order.id}>
-                <td className="py-2">{order.id}</td>
-                <td className="py-2">{order.serviceName}</td>
-                <td className="py-2">{order.orderDate}</td>
+              <tr key={order._id}>
+                <td className="py-2">{order._id}</td>
+                <td className="py-2">{order.serviceId.title}</td>
+                <td className="py-2">{moment(order.createdAt).format('DD/MM/YYYY, hh:mm A')}</td>
                 <td className="py-2">${order.amount}</td>
                 <td className="py-2">
-                  <span 
-                    className={`inline-block py-1 px-2 rounded ${order.status === 'Pending' ? 'bg-rose-200 text-rose-700' : 'bg-teal-200 text-teal-700'}`}
+                  <span
+                    className={`inline-block py-1 px-2 rounded capitalize w-24 text-center ${order.status === 'reviewing' ? 'bg-pink-700 text-white' : order.status === 'on the way' ? 'bg-yellow-700 text-white' : order.status === 'serviced' ? 'bg-green-700 text-white' : order.status === 'canceled' ? 'text-gray-600 font-bold italic' : 'bg-gray-700 text-white'}`}
+                    
                   >
                     {order.status}
                   </span>
                 </td>
                 <td className="py-2">
-                  <button className="bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded font-bold mr-1" onClick={() => handleDeleteOrder(order.id)}>
-                    <MdDeleteForever />
-                  </button>
-                  {order.status === 'Pending' && (
-                    <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-2 rounded" onClick={() => handleConfirmOrder(order.id)}>
-                      <GiConfirmed />
-                    </button>
-                  )}
+
+                  <select
+                  name='status'
+                  defaultValue={order.status}
+                  className="w-full border p-2 rounded capitalize"
+                  onChange={(e)=>handleChangedStatus(order._id, e.target.value)}
+                  >
+                 {
+                  currentStatus.map((element)=>(
+                    <option key={element} value={element} className="capitalize">{element}</option>
+                  ))
+                 }
+                  </select>
+
                 </td>
               </tr>
             ))}

@@ -28,6 +28,7 @@ import PrivateRoute from './PrivateRoute.jsx';
 import Layout from './admin/components/shared/Layout.jsx';
 import Dashboard from './admin/pages/Dashboard.jsx';
 import Services from './admin/pages/Services.jsx';
+import Orders from './admin/pages/Orders.jsx'
 
 const stripePromise = loadStripe(`pk_test_51NxsVnLDN7M5wmwbD25KOthKGcCIboO8nzde202QJWvKeb55zHfb70SehpOVnB3mL9PtR3VEvalwWMtPxOMCpCW000Iyq1CBCV`);
 
@@ -102,6 +103,10 @@ const router = createBrowserRouter([
       {
         path: "services",
         element: <Services />,
+      },
+      {
+        path: "orders",
+        element: <Orders />,
       },
     ]
   }

@@ -1,13 +1,21 @@
 import React, { useState } from 'react';
 import { ImBlocked } from 'react-icons/im';
 import { CgUnblock } from 'react-icons/cg';
+import { useEffect } from 'react';
+import { getAllUsers } from '../../apiCalls/users';
 
 const Users = () => {
-  const [users, setUsers] = useState([
-    { id: 1, name: 'John Doe', email: 'john@example.com', status: 'active' },
-    { id: 2, name: 'Jane Doe', email: 'jane@example.com', status: 'active' },
-    
-  ]);
+  const [users, setUsers] = useState([]);
+
+  useEffect(()=>{
+    const getUsers = async()=>{
+      const data = await getAllUsers();
+      setUsers(data.usersData)
+    }
+
+    getUsers();
+
+  },[])
 
   const toggleStatus = (userId) => {
     setUsers(users.map(user => {
@@ -28,14 +36,14 @@ const Users = () => {
               <th className="py-2">ID</th>
               <th className="py-2">Name</th>
               <th className="py-2">Email</th>
-              <th className="py-2">Status</th>
+              <th className="py-2">Role</th>
               <th className="py-2">Action</th>
             </tr>
           </thead>
           <tbody>
             {users.map(user => (
-              <tr key={user.id}>
-                <td>{user.id}</td>
+              <tr key={user._id}>
+                <td>{user._id}</td>
                 <td>{user.name}</td>
                 <td>{user.email}</td>
                 <td>

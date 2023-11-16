@@ -2,7 +2,6 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
-import {QueryClient,QueryClientProvider} from '@tanstack/react-query'
 
 
 
@@ -29,6 +28,7 @@ import Layout from './admin/components/shared/Layout.jsx';
 import Dashboard from './admin/pages/Dashboard.jsx';
 import Services from './admin/pages/Services.jsx';
 import Orders from './admin/pages/Orders.jsx'
+import Users from './admin/pages/Users.jsx'
 
 const stripePromise = loadStripe(`pk_test_51NxsVnLDN7M5wmwbD25KOthKGcCIboO8nzde202QJWvKeb55zHfb70SehpOVnB3mL9PtR3VEvalwWMtPxOMCpCW000Iyq1CBCV`);
 
@@ -108,6 +108,10 @@ const router = createBrowserRouter([
         path: "orders",
         element: <Orders />,
       },
+      {
+        path: "users",
+        element: <Users />,
+      },
     ]
   }
 ]);
@@ -117,18 +121,15 @@ const router = createBrowserRouter([
 
 
 
-const queryClient = new QueryClient()
 
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
 
-    <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <RouterProvider router={router} />
       </AuthProvider>
-    </QueryClientProvider>
 
   </React.StrictMode>,
 )

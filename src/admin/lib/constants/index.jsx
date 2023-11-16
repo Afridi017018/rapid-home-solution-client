@@ -33,7 +33,7 @@ export const DASHBOARD_SIDEBAR_LINKS = [
 	{
 		key: 'users',
 		label: 'Users',
-		path: '/users',
+		path: '/admin/users',
 		icon: <HiOutlineUsers />
 	},
 	{

@@ -35,7 +35,8 @@ const Orders = () => {
     "reviewing",
     "on the way",
     "serviced",
-    "canceled"
+    "canceled",
+    "failed"
   ]
 
 
@@ -75,7 +76,7 @@ const Orders = () => {
                 <td className="py-2">${order.amount}</td>
                 <td className="py-2">
                   <span
-                    className={`inline-block py-1 px-2 rounded capitalize w-24 text-center ${order.status === 'reviewing' ? 'bg-pink-700 text-white' : order.status === 'on the way' ? 'bg-yellow-700 text-white' : order.status === 'serviced' ? 'bg-green-700 text-white' : order.status === 'canceled' ? 'text-gray-600 font-bold italic' : 'bg-gray-700 text-white'}`}
+                    className={`inline-block py-1 px-2 rounded capitalize w-24 text-center ${order.status === 'reviewing' ? 'bg-pink-700 text-white' : order.status === 'on the way' ? 'bg-yellow-700 text-white' : order.status === 'serviced' ? 'bg-green-700 text-white' : order.status === 'canceled' ? 'text-gray-600 font-bold italic' : order.status === 'failed' ? 'bg-red-600 text-white' : 'bg-gray-700 text-white'}`}
                     
                   >
                     {order.status}

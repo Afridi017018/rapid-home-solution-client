@@ -21,7 +21,7 @@
 	th {
 		@apply font-semibold;
 	}
-	a {
+	/* a {
 		@apply text-sky-500 hover:underline;
-	}
+	} */
 }

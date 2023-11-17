@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { getUser } from '../../apiCalls/users';
+import { useContext } from 'react';
+import { getUser, trackingIp, updateUser } from '../../apiCalls/users';
+import { AuthContext } from '../../components/providers/AuthProvider';
 import Loading from '../Loading/Loading';
 
 const Profile = () => {
+
+  const { user, setUser } = useContext(AuthContext);
+  // console.log(user[0]._id)
+
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [region, setRegion] = useState('');
@@ -10,6 +16,11 @@ const Profile = () => {
   const [area, setArea] = useState('');
   const [address, setAddress] = useState('');
   const [isLoading, setIsLoading] = useState(true);
+  // const [cityIp, setCityIp] = useState('')
+  // const [regionIp, setRegionIp] = useState('')
+
+
+
 
   useEffect(() => {
     const getUserData = async () => {
@@ -22,19 +33,46 @@ const Profile = () => {
       setArea(data.userData[0].area);
       setAddress(data.userData[0].address);
       setIsLoading(false);
+
     };
 
     getUserData();
+
+
   }, []);
+
 
   if (isLoading) {
     return <Loading />;
   }
 
-  const handleSubmit = (e) => {
+
+
+  const ip = async () => {
+    const data = await trackingIp();
+
+    setRegion(region ==="" ? data.region : region);
+    setCity(city ==="" ? data.city : city);
+
+  }
+  ip();
+
+
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log('Form data:', { name, phone, region, city, area, address });
+    // if (region === "") {
+    //   setRegion(regionIp);
+    // }
+    // if (city === "") {
+    //   console.log("region")
+    //   setRegion(cityIp);
+    // }
+
+    const newData = await updateUser({ userId: user[0]._id, name, phone, region, city, area, address })
+    setUser([{ ...user[0], name, phone, region, city, area, address }]);
+    // console.log('Form data:', { userId: user[0]._id, name, phone, region, city, area, address });
   };
 
   return (

@@ -7,14 +7,20 @@ import {
 } from "@stripe/react-stripe-js";
 import React from "react";
 import { useState } from "react";
+import { useContext } from "react";
 import { useEffect } from "react";
 
 import { LiaCcVisa } from "react-icons/lia";
 import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import { getServiceById } from "../../apiCalls/services";
+import { AuthContext } from "../providers/AuthProvider";
 
 
 const PaymentInfo = () => {
+
+    const { user } = useContext(AuthContext);
+
     const stripe = useStripe();
     const elements = useElements();
     const serviceId = useParams();
@@ -32,7 +38,13 @@ const PaymentInfo = () => {
     }, [serviceId])
 
     const handlePayment = async (event) => {
+
         event.preventDefault();
+        if (!user[0].name || !user[0].email || !user[0].phone || !user[0].region || !user[0].city || !user[0].area || !user[0].country || !user[0].address) {
+            toast.dismiss();
+            return toast.info("Please update your profile !");
+        }
+
 
         try {
             const response = await fetch('http://localhost:4000/api/orders/create-payment-intent', {

@@ -43,9 +43,9 @@ export const DASHBOARD_SIDEBAR_LINKS = [
 		icon: <HiOutlineUser />
 	},
 	{
-		key: 'jobrequest',
+		key: 'job',
 		label: 'Job Request',
-		path: '/jobrequest',
+		path: '/admin/job',
 		icon: <HiOutlineSearchCircle />
 	},
 	{

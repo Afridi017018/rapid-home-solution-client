@@ -29,7 +29,9 @@ import Dashboard from './admin/pages/Dashboard.jsx';
 import Services from './admin/pages/Services.jsx';
 import Orders from './admin/pages/Orders.jsx'
 import Users from './admin/pages/Users.jsx'
+import JobRequest from './admin/pages/JobRequest'
 import Profile from './pages/Profile/Profile.jsx';
+import JobReq from './pages/JobReq/JobReq.jsx';
 
 const stripePromise = loadStripe(`pk_test_51NxsVnLDN7M5wmwbD25KOthKGcCIboO8nzde202QJWvKeb55zHfb70SehpOVnB3mL9PtR3VEvalwWMtPxOMCpCW000Iyq1CBCV`);
 
@@ -69,8 +71,9 @@ const router = createBrowserRouter([
       },
       {
         path: "/job",
-        element: <Elements stripe={stripePromise} ><Test /></Elements>,
+        // element: <Elements stripe={stripePromise} ><Test /></Elements>,
         // element: <div>hiiiiiiiiiiiiii</div>,
+        element: <JobReq />
       },
       {
         path: "/profile",
@@ -118,6 +121,10 @@ const router = createBrowserRouter([
         path: "users",
         element: <Users />,
       },
+      {
+        path: "job",
+        element: <JobRequest />,
+      }
     ]
   }
 ]);

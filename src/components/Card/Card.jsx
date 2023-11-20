@@ -6,7 +6,6 @@ import './Card.css'
 
 const Card = ({ displayFilter, element }) => {
 
-
     const navigate = useNavigate();
 
     return (

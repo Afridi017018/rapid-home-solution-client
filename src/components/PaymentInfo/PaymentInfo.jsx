@@ -54,7 +54,7 @@ const PaymentInfo = () => {
                 },
                 body: JSON.stringify({ amount: checkOutService[0].price * 100, currency: "bdt" }),
             });
-
+            
 
             if (response.status === 200) {
                 const data = await response.json();

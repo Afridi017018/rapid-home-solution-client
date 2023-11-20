@@ -51,7 +51,7 @@ export const DASHBOARD_SIDEBAR_LINKS = [
 	{
 		key: 'faq',
 		label: 'FAQ',
-		path: '/faq',
+		path: '/admin/faq',
 		icon: <FaQuestionCircle />
 	},
 	{

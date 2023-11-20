@@ -28,10 +28,14 @@ import Layout from './admin/components/shared/Layout.jsx';
 import Dashboard from './admin/pages/Dashboard.jsx';
 import Services from './admin/pages/Services.jsx';
 import Orders from './admin/pages/Orders.jsx'
+import Faq from './admin/pages/Faq'
 import Users from './admin/pages/Users.jsx'
 import JobRequest from './admin/pages/JobRequest'
 import Profile from './pages/Profile/Profile.jsx';
 import JobReq from './pages/JobReq/JobReq.jsx';
+
+import 'react-pure-modal/dist/react-pure-modal.min.css';
+
 
 const stripePromise = loadStripe(`pk_test_51NxsVnLDN7M5wmwbD25KOthKGcCIboO8nzde202QJWvKeb55zHfb70SehpOVnB3mL9PtR3VEvalwWMtPxOMCpCW000Iyq1CBCV`);
 
@@ -90,14 +94,14 @@ const router = createBrowserRouter([
       //   element: <Payment />,
       //   // element: <div>hiiiiiiiiiiiiii</div>,
       // },
-      {
-        path: "/success",
-        element: <div>Order success!!!!!!!</div>,
-      },
-      {
-        path: "/cancel",
-        element: <div>Order Cancel  !!!!!!!</div>,
-      },
+      // {
+      //   path: "/success",
+      //   element: <div>Order success!!!!!!!</div>,
+      // },
+      // {
+      //   path: "/cancel",
+      //   element: <div>Order Cancel  !!!!!!!</div>,
+      // },
     ],
   },
 
@@ -124,6 +128,10 @@ const router = createBrowserRouter([
       {
         path: "job",
         element: <JobRequest />,
+      },
+      {
+        path: "faq",
+        element: <Faq />,
       }
     ]
   }

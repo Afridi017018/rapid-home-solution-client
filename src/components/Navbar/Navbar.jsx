@@ -24,7 +24,8 @@ const Navbar = () => {
             }
         >
             Quick
-        </NavLink></li>
+        </NavLink>
+        </li>
         <li><NavLink
             to="/cart"
             className={({ isActive, isPending }) =>

@@ -1,37 +1,35 @@
 import React from 'react';
 
-const JobStatus = () => {
+const JobStatus = ({ applicationData }) => {
     return (
-        <div className='col-span-2 px-5 md:px-10'>
-            <div>
+        <div className='lg:col-span-2 px-5 md:px-5 max-h-screen shadow-lg border'>
+            <div className='font-bold underline underline-offset-4 text-gray-700 mt-5'>
                 Application Status
             </div>
 
-            <div className="overflow-x-auto">
+            <div className="overflow-auto my-3 max-h-full">
                 <table className="table">
                     {/* head */}
                     <thead>
                         <tr>
-                            <th>Job</th>
+                            <th>Application ID</th>
+                            <th>Job Category</th>
                             <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {/* row 1 */}
-                        <tr>
-                            <td>Quality Control Specialist</td>
-                            <td>Blue</td>
-                        </tr>
-                        {/* row 2 */}
-                        <tr className="hover">
-                            <td>Desktop Support Technician</td>
-                            <td>Purple</td>
-                        </tr>
-                        {/* row 3 */}
-                        <tr>
-                            <td>Tax Accountant</td>
-                            <td>Red</td>
-                        </tr>
+
+                        {
+                            applicationData.length > 0 &&
+                            applicationData.map((element) => (
+                                <tr key={element._id} className="text-gray-600">
+                                    <td>{element._id}</td>
+                                    <td className='capitalize'>{element.category.name}</td>
+                                    <td className={`capitalize font-bold ${element.status === "accepted" && "text-green-600"} ${element.status === "rejected" && "text-red-600"} ${element.status === "pending" && "text-gray-600"}`}>{element.status}</td>
+                                </tr>
+                            ))
+                        }
+
                     </tbody>
                 </table>
             </div>

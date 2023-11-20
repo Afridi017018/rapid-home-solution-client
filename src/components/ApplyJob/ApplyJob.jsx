@@ -1,9 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import { getAllCategories } from '../../apiCalls/category';
+import { addJobReq } from '../../apiCalls/jobReq';
 import Loading from '../../pages/Loading/Loading';
 import { AuthContext } from '../providers/AuthProvider';
 
-const ApplyJob = () => {
+const ApplyJob = ({getApplications}) => {
 
     const { user } = useContext(AuthContext);
 
@@ -32,13 +34,34 @@ const ApplyJob = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(e.target.cv.value)
+        const form = e.target;
+
+        const formData = new FormData(form);
+        formData.append('applicant', user[0]?._id)
+        setIsLoading(true);
+        const data = await addJobReq(formData);
+        setIsLoading(false);
+   
+        toast.dismiss();
+        console.log(data)
+        if(data.success){
+        toast.success(data.message)
+        }
+
+        else{
+            toast.info(data.message)
+        }
+
+        form.reset();
+       
+        getApplications(user[0]?._id)
+
     }
 
 
     return (
-        <div className='col-span-3 border px-5 md:px-16'>
-            <div className='text-lg md:text-xl font-bold text-center underline underline-offset-4'>Candidate</div>
+        <div className='lg:col-span-3 border px-5 md:px-12 shadow-lg text-gray-700'>
+            <div className='text-lg md:text-xl font-bold text-center underline underline-offset-4 mt-5'>Candidate</div>
             <div className='md:text-lg md:font-bold space-y-5 my-5'>
                 <p>Name: {user[0]?.name}</p>
                 <p>Email: {user[0]?.email}</p>

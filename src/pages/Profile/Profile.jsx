@@ -25,6 +25,7 @@ const Profile = () => {
   useEffect(() => {
     const getUserData = async () => {
       setIsLoading(true);
+
       const data = await getUser();
       setName(data.userData[0].name);
       setPhone(data.userData[0].phone);
@@ -32,6 +33,7 @@ const Profile = () => {
       setCity(data.userData[0].city);
       setArea(data.userData[0].area);
       setAddress(data.userData[0].address);
+
       setIsLoading(false);
 
     };
@@ -48,14 +50,16 @@ const Profile = () => {
 
 
 
-  const ip = async () => {
-    const data = await trackingIp();
+  if (region === "" || city === "") {
+    const ip = async () => {
+      const data = await trackingIp();
 
-    setRegion(region ==="" ? data.region : region);
-    setCity(city ==="" ? data.city : city);
+      setRegion(region === "" ? data.region : region);
+      setCity(city === "" ? data.city : city);
 
+    }
+    ip();
   }
-  ip();
 
 
 

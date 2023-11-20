@@ -14,6 +14,7 @@ const Cards = ({ displayFilter, setDisplayFilter }) => {
             const data = await getAllServices();
             setServices(data.services)
         }
+
         allServices();
     }, [])
 

@@ -71,7 +71,7 @@ const OrderTable = () => {
                                                 </td>
 
                                                 <td ><span
-                                                    className={`inline-block font-bold rounded capitalize w-24  ${element.status === 'reviewing' ? 'text-pink-700' : element.status === 'on the way' ? 'text-yellow-700' : element.status === 'serviced' ? 'text-green-700' : element.status === 'canceled' ? 'text-gray-600 italic' : element.status === 'failed' ? 'text-red-600' : 'text-gray-700'}`}
+                                                    className={`inline-block font-bold rounded capitalize w-24  ${element.status === 'reviewing' ? 'text-pink-700' : element.status === 'confirmed' ? 'text-blue-700' : element.status === 'on the way' ? 'text-yellow-700' : element.status === 'serviced' ? 'text-green-700' : element.status === 'canceled' ? 'text-gray-600 italic' : element.status === 'failed' ? 'text-red-600' : 'text-gray-700'}`}
 
                                                 >
                                                     {element.status}

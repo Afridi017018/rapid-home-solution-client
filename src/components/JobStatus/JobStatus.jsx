@@ -3,7 +3,7 @@ import React from 'react';
 const JobStatus = ({ applicationData }) => {
     return (
         <div className='lg:col-span-2 px-5 md:px-5 max-h-screen shadow-lg border'>
-            <div className='font-bold underline underline-offset-4 text-gray-700 mt-5'>
+            <div className='font-bold text-gray-700 mt-5'>
                 Application Status
             </div>
 

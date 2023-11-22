@@ -13,7 +13,7 @@ import { useEffect } from "react";
 import { LiaCcVisa } from "react-icons/lia";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import { getServiceById } from "../../apiCalls/services";
+import { getCartByCartId } from "../../apiCalls/cart";
 import { AuthContext } from "../providers/AuthProvider";
 
 
@@ -23,22 +23,24 @@ const PaymentInfo = () => {
 
     const stripe = useStripe();
     const elements = useElements();
-    const serviceId = useParams();
+    const cartId = useParams();
+    // console.log(cartId)
 
     const [checkOutService, setCheckOutService] = useState([])
 
     useEffect(() => {
-        const getService = async () => {
-            const data = await getServiceById(serviceId.id);
-            setCheckOutService([data.service]);
-            // console.log([data.service][0]);
+        const getCartInfo = async () => {
+            const data = await getCartByCartId(cartId.id);
+            setCheckOutService(data.cartData);
+
+            // console.log(data.cartData)
         }
 
-        getService();
-    }, [serviceId])
+        getCartInfo();
+    }, [cartId])
 
     const handlePayment = async (event) => {
-
+        // console.log(checkOutService[0].quick)
         event.preventDefault();
         if (!user[0].name || !user[0].email || !user[0].phone || !user[0].region || !user[0].city || !user[0].area || !user[0].country || !user[0].address) {
             toast.dismiss();
@@ -47,14 +49,17 @@ const PaymentInfo = () => {
 
 
         try {
+            const price = checkOutService[0].quick ? checkOutService[0].serviceId.price+((10/100)*checkOutService[0].serviceId.price) : checkOutService[0].serviceId.price ;
+
+            console.log(price)
             const response = await fetch('http://localhost:4000/api/orders/create-payment-intent', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ amount: checkOutService[0].price * 100, currency: "bdt" }),
+                body: JSON.stringify({ amount:price * 100, currency: "bdt" }),
             });
-            
+
 
             if (response.status === 200) {
                 const data = await response.json();
@@ -70,9 +75,12 @@ const PaymentInfo = () => {
                     console.log('Payment confirmed');
                     const obj = {
                         userId: "652cc4f5f3c3167a19f8ec15",
-                        serviceId: serviceId.id,
+                        serviceId: checkOutService[0].serviceId._id,
                         paymentIntentId: confirmPayment.paymentIntent.id,
-                        amount: checkOutService[0].price
+                        
+                        amount: checkOutService[0].quick ? checkOutService[0].serviceId.price + ((10 / 100) * checkOutService[0].serviceId.price) : checkOutService[0].serviceId.price,
+
+                        quick: checkOutService[0].quick
                     }
                     await fetch('http://localhost:4000/api/orders/save-order', {
                         method: 'POST',
@@ -105,13 +113,11 @@ const PaymentInfo = () => {
                     checkOutService.length > 0 &&
                     <div className='text-gray-500 bg-red-50'>
                         <div className='border border-gray-100 rounded px-5 shadow-2xl py-5'>
-                            <h2 className='text-xl font-medium my-2'>Service Id : {checkOutService[0]._id}</h2>
+                            <h2 className='text-xl font-medium my-2'>Service Id : {checkOutService[0].serviceId._id}</h2>
                             <hr className='w-4/5' />
-                            <h2 className='text-xl font-medium my-2'>Service Name : {checkOutService[0].title}</h2>
+                            <h2 className='text-xl font-medium my-2'>Service Name : {checkOutService[0].serviceId.title}</h2>
                             <hr className='w-4/5' />
-                            <h2 className='text-xl font-medium my-2'>Category : {checkOutService[0].category.name}</h2>
-                            <hr className='w-4/5' />
-                            <h2 className='text-xl font-medium my-2'>Price : ${checkOutService[0].price}</h2>
+                            <h2 className='text-xl font-medium my-2'>Price : ${checkOutService[0].quick ? checkOutService[0].serviceId.price + ((10 / 100) * checkOutService[0].serviceId.price) : checkOutService[0].serviceId.price}</h2>
 
                         </div>
                     </div>

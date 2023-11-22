@@ -18,9 +18,9 @@ const getAllServices = async () => {
 
 
 
-const getServiceById = async (id) => {
+const getServiceById = async (id, serviceType) => {
 
-    const response = await fetch(`http://localhost:4000/api/services/get-service-by-id/${id}`, {
+    const response = await fetch(`http://localhost:4000/api/services/get-service-by-id?id=${id}&serviceType=${serviceType}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',

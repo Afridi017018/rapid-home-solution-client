@@ -1,7 +1,7 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { addToCart } from '../../apiCalls/cart';
 import { getServiceById } from '../../apiCalls/services';
@@ -10,13 +10,20 @@ import Faq from '../../components/Faq/Faq';
 
 const ServiceDetails = () => {
 
-    const { id } = useParams();
+
+    const [searchParams] = useSearchParams();
+
+    const id = searchParams.get('id');
+    const serviceType = searchParams.get('serviceType');
+
+    // console.log(id, serviceType)
 
     const [service, setService] = useState(null)
 
     useEffect(() => {
         const singleService = async () => {
-            const data = await getServiceById(id);
+            const data = await getServiceById(id, serviceType);
+            // console.log(data.service)
             setService(data.service)
 
         }
@@ -27,7 +34,19 @@ const ServiceDetails = () => {
 
 
     const handleAddToCart = async (serviceId) => {
-        const data = await addToCart({ serviceId, userId: "652cc4f5f3c3167a19f8ec15" });
+
+        let quick;
+
+        if(serviceType === 'quick')
+        {
+            quick = true;
+        }
+        else{
+            quick = false;
+        }
+
+
+        const data = await addToCart({ serviceId, userId: "652cc4f5f3c3167a19f8ec15", quick});
 
         if (data.success) {
             toast.dismiss();
@@ -99,7 +118,7 @@ const ServiceDetails = () => {
 
                         <div>
                             <h2 className='text-2xl text-red-900 font-bold mb-3'>FAQ</h2>
-                            {/* <p className='text-gray-500 text-lg font-medium'>Coming soon ...</p> */}
+
                             <Faq />
                         </div>
 

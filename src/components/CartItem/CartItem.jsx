@@ -21,11 +21,11 @@ const CartItem = ({element}) => {
                     <hr />
                     <h4 className='text-lg text-gray-500 my-1'>Estimate Duration: {element.serviceId.duration} Hours</h4>
                     <h4 className='text-lg text-gray-500 my-1'>Warranty: 7 days</h4>
-                    <h4 className='text-lg text-gray-500 my-1'>Price: ${element.serviceId.price}</h4>
+                    <h4 className='text-lg text-gray-500 my-1'>Price: ${element.quick ? element.serviceId.price+((10/100)*element.serviceId.price) : element.serviceId.price }</h4>
                     <hr />
 
                     <div className='flex gap-5 justify-center my-3 text-sm md:text-base'>
-                        <button onClick={()=>handlePayment(element.serviceId._id)} className='bg-green-700 hover:bg-green-800 text-white px-2 md:px-3 py-1 rounded-md'>Proceed To Payment</button>
+                        <button onClick={()=>handlePayment(element._id)} className='bg-green-700 hover:bg-green-800 text-white px-2 md:px-3 py-1 rounded-md'>Proceed To Payment</button>
                         <button className='bg-red-700 hover:bg-red-800 text-white px-2 py-1 rounded-md'>Remove</button>
                     </div>
 

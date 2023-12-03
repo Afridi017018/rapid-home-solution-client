@@ -15,6 +15,7 @@ const Profile = () => {
   const [city, setCity] = useState('');
   const [area, setArea] = useState('');
   const [address, setAddress] = useState('');
+  const [ipCalled, setIpCalled] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   // const [cityIp, setCityIp] = useState('')
   // const [regionIp, setRegionIp] = useState('')
@@ -50,16 +51,19 @@ const Profile = () => {
 
 
 
-  if (region === "" || city === "") {
+  if ((region === "" || city === "") && !ipCalled) {
+
     const ip = async () => {
       const data = await trackingIp();
 
       setRegion(region === "" ? data.region : region);
       setCity(city === "" ? data.city : city);
-
+      setIpCalled(true)
     }
     ip();
   }
+
+ 
 
 
 

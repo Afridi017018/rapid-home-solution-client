@@ -49,7 +49,7 @@ const PaymentInfo = () => {
 
 
         try {
-            const price = checkOutService[0].quick ? checkOutService[0].serviceId.price+((10/100)*checkOutService[0].serviceId.price) : checkOutService[0].serviceId.price ;
+            const price = checkOutService[0].quick ? checkOutService[0].serviceId.price+((15/100)*checkOutService[0].serviceId.price) : checkOutService[0].serviceId.price ;
 
             console.log(price)
             const response = await fetch('http://localhost:4000/api/orders/create-payment-intent', {
@@ -78,7 +78,7 @@ const PaymentInfo = () => {
                         serviceId: checkOutService[0].serviceId._id,
                         paymentIntentId: confirmPayment.paymentIntent.id,
                         
-                        amount: checkOutService[0].quick ? checkOutService[0].serviceId.price + ((10 / 100) * checkOutService[0].serviceId.price) : checkOutService[0].serviceId.price,
+                        amount: checkOutService[0].quick ? checkOutService[0].serviceId.price + ((15 / 100) * checkOutService[0].serviceId.price) : checkOutService[0].serviceId.price,
 
                         quick: checkOutService[0].quick
                     }
@@ -117,7 +117,7 @@ const PaymentInfo = () => {
                             <hr className='w-4/5' />
                             <h2 className='text-xl font-medium my-2'>Service Name : {checkOutService[0].serviceId.title}</h2>
                             <hr className='w-4/5' />
-                            <h2 className='text-xl font-medium my-2'>Price : ${checkOutService[0].quick ? checkOutService[0].serviceId.price + ((10 / 100) * checkOutService[0].serviceId.price) : checkOutService[0].serviceId.price}</h2>
+                            <h2 className='text-xl font-medium my-2'>Price : ${checkOutService[0].quick ? checkOutService[0].serviceId.price + ((15/ 100) * checkOutService[0].serviceId.price) : checkOutService[0].serviceId.price}</h2>
 
                         </div>
                     </div>

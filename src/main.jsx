@@ -35,6 +35,7 @@ import Profile from './pages/Profile/Profile.jsx';
 import JobReq from './pages/JobReq/JobReq.jsx';
 
 import 'react-pure-modal/dist/react-pure-modal.min.css';
+import QuickServices from './pages/QuickServices/QuickServices.jsx';
 
 
 const stripePromise = loadStripe(`pk_test_51NxsVnLDN7M5wmwbD25KOthKGcCIboO8nzde202QJWvKeb55zHfb70SehpOVnB3mL9PtR3VEvalwWMtPxOMCpCW000Iyq1CBCV`);
@@ -63,7 +64,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/quick-service",
-        element: <div>Quick Service</div>,
+        element: <QuickServices />,
       },
       {
         path: "/cart",

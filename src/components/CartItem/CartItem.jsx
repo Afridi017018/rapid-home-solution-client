@@ -21,7 +21,7 @@ const CartItem = ({element}) => {
                     <hr />
                     <h4 className='text-lg text-gray-500 my-1'>Estimate Duration: {element.serviceId.duration} Hours</h4>
                     <h4 className='text-lg text-gray-500 my-1'>Warranty: 7 days</h4>
-                    <h4 className='text-lg text-gray-500 my-1'>Price: ${element.quick ? element.serviceId.price+((10/100)*element.serviceId.price) : element.serviceId.price }</h4>
+                    <h4 className='text-lg text-gray-500 my-1'>Price: ${element.quick ? element.serviceId.price+((15/100)*element.serviceId.price) : element.serviceId.price }</h4>
                     <hr />
 
                     <div className='flex gap-5 justify-center my-3 text-sm md:text-base'>

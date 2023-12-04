@@ -7,7 +7,7 @@ import { TbFilterSearch } from "react-icons/tb";
 
 import { getAllCategories } from "../../apiCalls/category"
 
-const Filters = ({ displayFilter, setDisplayFilter }) => {
+const Filters = ({ displayFilter, setDisplayFilter, filterItem, setFilterItem }) => {
 
     const [categories, setCategories] = useState([])
 
@@ -42,16 +42,26 @@ const Filters = ({ displayFilter, setDisplayFilter }) => {
                         categories.map((element) => (
 
                             <div key={element._id} className='px-5 my-7 text-gray-600'>
-                                
+
                                 <label htmlFor={element.name} className='flex items-center'>
 
-                                    <input type="checkbox" className='w-5 h-5' />
+                                    <input type="checkbox" checked={filterItem === element._id} className='w-5 h-5'
+                                        onChange={(e) => {
+                                            if (e.target.checked) {
+                                                setFilterItem(element._id);
+                                            }
+                                            else {
+                                                setFilterItem("");
+                                            }
+                                        }}
+                                    />
 
                                     <span className='px-2 capitalize'>{element.name}</span>
                                 </label>
                             </div>
 
                         ))
+
 
                     }
 

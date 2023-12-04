@@ -9,19 +9,29 @@ const Home = () => {
 
     const [displayFilter, setDisplayFilter] = useState(true)
 
+    const [filterItem, setFilterItem] = useState("")
+    const [searchItem, setSearchItem] = useState("")
+
     return (
         <div>
             <Banner />
-            <SearchBar />
+            <SearchBar setSearchItem={setSearchItem} />
+
             <div className='flex'>
-            <Filters
-            displayFilter={displayFilter} 
-            setDisplayFilter={setDisplayFilter} 
-            />
-            <Cards
-            displayFilter={displayFilter}  
-            setDisplayFilter={setDisplayFilter} 
-            />
+
+                <Filters
+                    displayFilter={displayFilter}
+                    setDisplayFilter={setDisplayFilter}
+                    filterItem={filterItem}
+                    setFilterItem={setFilterItem}
+                />
+
+                <Cards
+                    displayFilter={displayFilter}
+                    setDisplayFilter={setDisplayFilter}
+                    filterItem={filterItem}
+                    searchItem={searchItem}
+                />
             </div>
 
         </div>

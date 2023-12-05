@@ -1,6 +1,6 @@
-const getAllServices = async (search="", filter="") => {
+const getAllServices = async (search="", filter="", page="", limit="") => {
 
-    const response = await fetch(`http://localhost:4000/api/services/get-all-services?search=${search}&filter=${filter}`, {
+    const response = await fetch(`http://localhost:4000/api/services/get-all-services?search=${search}&filter=${filter}&page=${page}&limit=${limit}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',

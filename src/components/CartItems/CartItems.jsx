@@ -23,7 +23,7 @@ const CartItems = () => {
             {
                 cart.length > 0 ?
                     cart.map((element) => (
-                        <CartItem key={element._id} element={element} />
+                        <CartItem key={element._id} element={element} getCartData={getCartData} />
                     ))
                     :
                     <div className='flex justify-center items-center h-full'>

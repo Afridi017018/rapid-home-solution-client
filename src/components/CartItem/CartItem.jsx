@@ -1,12 +1,39 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import { removeCart } from '../../apiCalls/cart';
 
-const CartItem = ({element}) => {
+const CartItem = ({element, getCartData}) => {
 
     const navigate = useNavigate()
 
     const handlePayment = (id)=>{
         navigate(`/paymentInfo/${id}`);
+    }
+
+    const handleRemove = async (cartId)=>{
+       
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, remove it!"
+          }).then(async (result) => {
+            if (result.isConfirmed) {
+
+                await removeCart(cartId);
+                getCartData();
+
+              Swal.fire({
+                title: "Removed!",
+                icon: "success"
+              });
+            }
+          });
+
     }
 
     return (
@@ -26,7 +53,7 @@ const CartItem = ({element}) => {
 
                     <div className='flex gap-5 justify-center my-3 text-sm md:text-base'>
                         <button onClick={()=>handlePayment(element._id)} className='bg-green-700 hover:bg-green-800 text-white px-2 md:px-3 py-1 rounded-md'>Proceed To Payment</button>
-                        <button className='bg-red-700 hover:bg-red-800 text-white px-2 py-1 rounded-md'>Remove</button>
+                        <button onClick={()=>handleRemove(element._id)} className='bg-red-700 hover:bg-red-800 text-white px-2 py-1 rounded-md'>Remove</button>
                     </div>
 
                 </div>

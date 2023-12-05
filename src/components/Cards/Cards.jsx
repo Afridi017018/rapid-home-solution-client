@@ -16,7 +16,7 @@ const Cards = ({ displayFilter, setDisplayFilter, searchItem, filterItem }) => {
         const allServices = async () => {
             const data = await getAllServices(searchItem.trim(), filterItem, page + 1, 12);
             setServices(data.services)
-            console.log(data)
+            // console.log(data)
             setTotalPages(data.totalPages);
         }
 
@@ -26,7 +26,7 @@ const Cards = ({ displayFilter, setDisplayFilter, searchItem, filterItem }) => {
     const handlePageChange = (currentPage) => {
         setPage(currentPage.selected);
 
-        console.log(currentPage.selected)
+        // console.log(currentPage.selected)
     };
 
 
@@ -53,18 +53,15 @@ const Cards = ({ displayFilter, setDisplayFilter, searchItem, filterItem }) => {
 
                     }
 
-
-                </div>
-
-                {
+{
                     services.length > 0 &&
-                    <div>
+                    <div className='col-span-1 md:col-span-2 lg:col-span-3 xl:col-span-4'>
                     <ReactPaginate
                         pageCount={totalPages}
                         pageRangeDisplayed={5}
                         marginPagesDisplayed={2}
                         onPageChange={handlePageChange}
-                        containerClassName={'flex justify-center mt-8'}
+                        containerClassName={'flex justify-center items-center my-5'}
                         pageClassName={'mx-2'}
                         breakClassName={'mx-2'}
                         previousLabel={'Previous'}
@@ -78,6 +75,12 @@ const Cards = ({ displayFilter, setDisplayFilter, searchItem, filterItem }) => {
                 }
 
 
+
+                </div>
+
+                
+
+
                 {
                     services.length === 0 &&
                     <div className='flex justify-center items-center h-screen'>
@@ -86,8 +89,7 @@ const Cards = ({ displayFilter, setDisplayFilter, searchItem, filterItem }) => {
                 }
 
             </div>
-
-
+            
 
         </>
 

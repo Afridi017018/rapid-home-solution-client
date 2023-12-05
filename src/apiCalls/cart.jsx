@@ -49,4 +49,20 @@ const getCartByCartId = async (cartId) => {
 }
 
 
-export { addToCart, getCart, getCartByCartId };
+const removeCart = async (cartId) => {
+    const response = await fetch(`http://localhost:4000/api/services/remove-cart/${cartId}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            // 'authorization': `Bearer ${localStorage.getItem("token")}`
+        },
+        // body: JSON.stringify(obj)
+
+    })
+
+    const data = await response.json();
+    return data;
+}
+
+
+export { addToCart, getCart, getCartByCartId, removeCart };

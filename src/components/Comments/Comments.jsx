@@ -1,9 +1,16 @@
 import React, { useState } from 'react';
+import { useContext } from 'react';
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { addComment, getComments } from '../../apiCalls/addComment';
 import Comment from '../Comment/Comment';
+import { AuthContext } from '../providers/AuthProvider';
 
-const Comments = ({serviceId}) => {
+const Comments = ({ serviceId }) => {
+
+    const { user } = useContext(AuthContext)
+    const navigate = useNavigate();
+
 
     const [inputComment, setInputComment] = useState("");
     const [serviceComments, setServiceComments] = useState([]);
@@ -23,7 +30,7 @@ const Comments = ({serviceId}) => {
     const handleAddComment = async () => {
 
         const obj = {
-            userId: "652cc4f5f3c3167a19f8ec15",
+            userId: user[0]._id,
             serviceId: serviceId,
             comment: inputComment
         }
@@ -38,7 +45,12 @@ const Comments = ({serviceId}) => {
         <div className='max-h-[420px] border my-10 overflow-auto px-1 rounded'>
             <div className='flex my-1'>
                 <input onChange={(e) => setInputComment(e.target.value)} className='border w-full focus:border-red-500 px-2 outline-none' value={inputComment} type="text" />
-                <button onClick={handleAddComment} className='bg-red-200 text-red-800 hover:bg-red-300 px-2 py-1 w-28 h-12 font-bold'>Comment</button>
+                {
+                    user?.length > 0 ?
+                        <button onClick={handleAddComment} className='bg-red-200 text-red-800 hover:bg-red-300 px-2 py-1 w-28 h-12 font-bold'>Comment</button>
+                        :
+                        <button onClick={() => navigate('/login')} className='bg-red-200 text-red-800 hover:bg-red-300 px-2 py-1 w-28 h-12 font-bold'>Comment</button>
+                }
             </div>
 
 

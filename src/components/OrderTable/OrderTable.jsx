@@ -2,8 +2,13 @@ import React, { useState } from 'react';
 import moment from 'moment';
 import { useEffect } from 'react';
 import { getOrders, updateRating } from '../../apiCalls/orders';
+import { useContext } from 'react';
+import { AuthContext } from '../providers/AuthProvider';
 
 const OrderTable = () => {
+
+    const {user} = useContext(AuthContext)
+
     const [orders, setOrders] = useState([])
 
     const handleRatingChange = async (orderId, rate) => {
@@ -17,7 +22,7 @@ const OrderTable = () => {
 
 
     const getAllOrders = async () => {
-        const data = await getOrders("652cc4f5f3c3167a19f8ec15");
+        const data = await getOrders(user[0]?._id);
         setOrders(data.orders);
 
     }
@@ -26,16 +31,16 @@ const OrderTable = () => {
     useEffect(() => {
 
         getAllOrders();
-    }, [])
+    }, [user])
 
 
 
     return (
-        <div>
+        <div className='min-h-[450px]'>
 
             {
                 orders.length > 0 ?
-                    <div className='container mx-auto my-10 shadow-2xl border '>
+                    <div className='container mx-auto my-10 shadow-2xl border'>
                         <div className="overflow-x-auto">
                             <table className="table">
                                 {/* head */}
@@ -110,8 +115,9 @@ const OrderTable = () => {
                     </div>
                     :
 
-                    <div>
-                        <h2>Empty List!</h2>
+                    <div className='text-center'>
+                       <img className='mx-auto' src="https://img.freepik.com/free-vector/realistic-cube-box-mockup_52683-87716.jpg?w=360&t=st=1701898381~exp=1701898981~hmac=d01c7b424babd2154cc4a73b709a89c8c74c5473ddabe1420833ec85251da408" alt="" />
+                       <h5 className='my-5 font-bold text-gray-500'>Empty List</h5>
                     </div>
             }
 

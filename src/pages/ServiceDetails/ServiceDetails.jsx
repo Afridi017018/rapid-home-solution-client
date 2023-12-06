@@ -1,15 +1,20 @@
 import React from 'react';
+import { useContext } from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { useParams, useSearchParams } from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { addToCart } from '../../apiCalls/cart';
 import { getServiceById } from '../../apiCalls/services';
 import Comments from '../../components/Comments/Comments';
 import Faq from '../../components/Faq/Faq';
+import { AuthContext } from '../../components/providers/AuthProvider';
 
 const ServiceDetails = () => {
 
+    const {user} = useContext(AuthContext);
+
+    const navigate = useNavigate()
 
     const [searchParams] = useSearchParams();
 
@@ -46,7 +51,7 @@ const ServiceDetails = () => {
         }
 
 
-        const data = await addToCart({ serviceId, userId: "652cc4f5f3c3167a19f8ec15", quick});
+        const data = await addToCart({ serviceId, userId: user[0]._id, quick});
 
         if (data.success) {
             toast.dismiss();
@@ -71,8 +76,14 @@ const ServiceDetails = () => {
                             <img className='h-[400px] w-full rounded-t-md shadow-2xl' src={service.image[0].secure_url} alt="" />
                         </div>
                         <div className='text-center bg-red-300 rounded-b-md'>
-
-                            <button onClick={() => handleAddToCart(service._id)} className='bg-red-900 hover:bg-red-950 text-white px-3 py-1 rounded-md text-xl font-semibold my-2'>Add To Cart</button>
+                        
+                        {
+                            user?.length > 0 ?
+                             <button onClick={() => handleAddToCart(service._id)} className='bg-red-900 hover:bg-red-950 text-white px-3 py-1 rounded-md my-2'>Add To Cart</button>
+                             :
+                             <button onClick={() => navigate('/login')} className='bg-red-900 hover:bg-red-950 text-white px-3 py-1 rounded-md my-2'>Add To Cart</button>
+                        }
+                           
                         </div>
 
                         <div>

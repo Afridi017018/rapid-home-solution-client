@@ -1,22 +1,26 @@
 import React from 'react';
 import { useState } from 'react';
+import { useContext } from 'react';
 import { useEffect } from 'react';
 import { getCart } from '../../apiCalls/cart';
 import CartItem from '../CartItem/CartItem';
+import { AuthContext } from '../providers/AuthProvider';
 
 const CartItems = () => {
+
+    const {user} = useContext(AuthContext);
 
     const [cart, setCart] = useState([]);
 
     const getCartData = async () => {
-        const cartData = await getCart("652cc4f5f3c3167a19f8ec15");
+        const cartData = await getCart(user[0]?._id);
         setCart(cartData.cartData)
         // console.log(cartData.cartData)
     }
 
     useEffect(() => {
         getCartData();
-    }, [])
+    }, [user])
 
     return (
         <div className='min-h-[553px]'>

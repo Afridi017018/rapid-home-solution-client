@@ -11,7 +11,7 @@ import { useContext } from "react";
 import { useEffect } from "react";
 
 import { LiaCcVisa } from "react-icons/lia";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { getCartByCartId } from "../../apiCalls/cart";
 import { AuthContext } from "../providers/AuthProvider";
@@ -20,6 +20,7 @@ import { AuthContext } from "../providers/AuthProvider";
 const PaymentInfo = () => {
 
     const { user } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     const stripe = useStripe();
     const elements = useElements();
@@ -74,7 +75,7 @@ const PaymentInfo = () => {
                 if (confirmPayment.paymentIntent.status === "succeeded") {
                     console.log('Payment confirmed');
                     const obj = {
-                        userId: "652cc4f5f3c3167a19f8ec15",
+                        userId: user[0]._id,
                         serviceId: checkOutService[0].serviceId._id,
                         paymentIntentId: confirmPayment.paymentIntent.id,
                         
@@ -89,6 +90,8 @@ const PaymentInfo = () => {
                         },
                         body: JSON.stringify(obj),
                     });
+
+                    navigate('/orders')
                 }
             }
         } catch (error) {

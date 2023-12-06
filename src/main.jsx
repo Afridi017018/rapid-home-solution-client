@@ -37,6 +37,7 @@ import JobReq from './pages/JobReq/JobReq.jsx';
 
 import 'react-pure-modal/dist/react-pure-modal.min.css';
 import QuickServices from './pages/QuickServices/QuickServices.jsx';
+import ErrorPage from './pages/ErrorPage/ErrorPage.jsx';
 
 
 const stripePromise = loadStripe(`pk_test_51NxsVnLDN7M5wmwbD25KOthKGcCIboO8nzde202QJWvKeb55zHfb70SehpOVnB3mL9PtR3VEvalwWMtPxOMCpCW000Iyq1CBCV`);
@@ -46,6 +47,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",
@@ -110,6 +112,7 @@ const router = createBrowserRouter([
   {
     path: "/admin",
     element: <PrivateRoute><AdminRoute><Layout /></AdminRoute></PrivateRoute>,
+    errorElement: <ErrorPage />,
     children: [
       {
         index: true,

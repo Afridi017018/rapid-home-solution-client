@@ -19,7 +19,7 @@ const CartItems = () => {
     }, [])
 
     return (
-        <div className='h-[553px]'>
+        <div className='min-h-[553px]'>
             {
                 cart.length > 0 ?
                     cart.map((element) => (

@@ -24,6 +24,7 @@ import Payment from './pages/Payment/Payment.jsx';
 import Order from './pages/Order/Order.jsx';
 import AuthProvider from './components/providers/AuthProvider.jsx';
 import PrivateRoute from './PrivateRoute.jsx';
+import AdminRoute from './AdminRoute.jsx';
 import Layout from './admin/components/shared/Layout.jsx';
 import Dashboard from './admin/pages/Dashboard.jsx';
 import Services from './admin/pages/Services.jsx';
@@ -60,7 +61,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/service-details",
-        element: <PrivateRoute><ServiceDetails /></PrivateRoute>,
+        element: <ServiceDetails />,
       },
       {
         path: "/quick-service",
@@ -78,11 +79,11 @@ const router = createBrowserRouter([
         path: "/job",
         // element: <Elements stripe={stripePromise} ><Test /></Elements>,
         // element: <div>hiiiiiiiiiiiiii</div>,
-        element: <JobReq />
+        element: <PrivateRoute><JobReq /></PrivateRoute>
       },
       {
         path: "/profile",
-        element: <Profile />,
+        element: <PrivateRoute><Profile /></PrivateRoute>,
         // element: <div>hiiiiiiiiiiiiii</div>,
       },
       {
@@ -108,31 +109,31 @@ const router = createBrowserRouter([
 
   {
     path: "/admin",
-    element: <Layout />,
+    element: <PrivateRoute><AdminRoute><Layout /></AdminRoute></PrivateRoute>,
     children: [
       {
         index: true,
-        element: <Dashboard />,
+        element: <PrivateRoute><AdminRoute><Dashboard /></AdminRoute></PrivateRoute>,
       },
       {
         path: "services",
-        element: <Services />,
+        element: <PrivateRoute> <AdminRoute><Services /></AdminRoute> </PrivateRoute>,
       },
       {
         path: "orders",
-        element: <Orders />,
+        element: <PrivateRoute><AdminRoute><Orders /></AdminRoute></PrivateRoute>,
       },
       {
         path: "users",
-        element: <Users />,
+        element: <PrivateRoute><AdminRoute><Users /></AdminRoute></PrivateRoute>,
       },
       {
         path: "job",
-        element: <JobRequest />,
+        element: <PrivateRoute><AdminRoute><JobRequest /></AdminRoute></PrivateRoute>,
       },
       {
         path: "faq",
-        element: <Faq />,
+        element: <PrivateRoute><AdminRoute><Faq /></AdminRoute></PrivateRoute>,
       }
     ]
   }

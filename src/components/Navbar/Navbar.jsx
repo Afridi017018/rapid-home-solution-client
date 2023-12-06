@@ -5,7 +5,7 @@ import { AuthContext } from '../providers/AuthProvider';
 
 const Navbar = () => {
 
-    const { user } = useContext(AuthContext)
+    const { user, handleLogout } = useContext(AuthContext)
     // console.log(user)
 
     const list = <div className='lg:flex text-lg font-semibold lg:gap-5'>
@@ -50,7 +50,21 @@ const Navbar = () => {
         >
             Job
         </NavLink></li>
-        <li className='lg:hidden'><NavLink
+        {
+            user?.length > 0 &&
+            user[0]?.role === "admin" &&
+            <li><NavLink
+            to="/admin"
+            className={({ isActive, isPending }) =>
+                isPending ? "pending" : isActive ? "text-orange-400 underline" : ""
+            }
+        >
+            Admin
+        </NavLink></li>
+           
+
+        }
+        <li className={`lg:hidden ${user?.length > 0 && 'hidden'}`}><NavLink
             to="/login"
             className={({ isActive, isPending }) =>
                 isPending ? "pending" : isActive ? "text-orange-400 underline" : ""
@@ -58,7 +72,7 @@ const Navbar = () => {
         >
             Login
         </NavLink></li>
-        <li className='lg:hidden'><NavLink
+        <li className={`lg:hidden ${user?.length > 0 && 'hidden'}`}><NavLink
             to="/register"
             className={({ isActive, isPending }) =>
                 isPending ? "pending" : isActive ? "text-orange-400 underline" : ""
@@ -99,7 +113,7 @@ const Navbar = () => {
 
 
 
-                            <ul className='lg:flex text-lg font-semibold lg:gap-5'>
+                            <ul className='flex text-lg font-semibold gap-3 lg:gap-5'>
                                 <li><NavLink
                                     to="/profile"
                                     className={({ isActive, isPending }) =>
@@ -115,13 +129,13 @@ const Navbar = () => {
                                         isPending ? "pending" : isActive ? "text-orange-400 underline" : ""
                                     }
                                 >
-                                    <button className='px-3 py-1 bg-red-600 rounded text-base'>Logout</button>
+                                    <button onClick={handleLogout} className='px-3 py-1 bg-red-600 rounded text-base'>Logout</button>
                                 </NavLink></li>
                             </ul>
 
                             :
 
-                            <ul className='lg:flex text-lg font-semibold lg:gap-5'>
+                            <ul className='hidden lg:flex text-lg font-semibold lg:gap-5'>
                                 <li><NavLink
                                     to="/login"
                                     className={({ isActive, isPending }) =>

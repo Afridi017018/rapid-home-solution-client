@@ -1,11 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { userRegister } from '../../apiCalls/users';
 
 
 
 const Register = () => {
+
+    const navigate = useNavigate();
+
     const handleRegisterSubmit = async (e) => {
 
         e.preventDefault()
@@ -25,6 +28,7 @@ const Register = () => {
 
         toast.dismiss();
         if (data.success) {
+            navigate('/login')
             toast.success(data.message);
         }
 

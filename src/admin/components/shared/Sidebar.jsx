@@ -1,16 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import classNames from 'classnames';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FcHome } from 'react-icons/fc';
 import { DASHBOARD_SIDEBAR_LINKS } from '../../lib/constants';
+import { AuthContext } from '../../../components/providers/AuthProvider';
 
 const Sidebar = () => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
+  const {handleLogout} = useContext(AuthContext);
 
   return (
     <div className="bg-neutral-900 p-3 flex flex-col">
-      <div onClick={()=>navigate(`/`)} className="flex items-center gap-2 px-1 py-3 cursor-pointer">
+      <div onClick={() => navigate(`/`)} className="flex items-center gap-2 px-1 py-3 cursor-pointer">
         <FcHome fontSize={24} />
         <span className="text-neutral-200 text-lg">Rapid Home Solution</span>
       </div>
@@ -18,6 +20,9 @@ const Sidebar = () => {
         {DASHBOARD_SIDEBAR_LINKS.map((link) => (
           <SidebarLink key={link.key} link={link} />
         ))}
+
+        <button onClick={handleLogout} className='text-white bg-red-600 my-5 py-1 rounded'>Logout</button>
+
       </div>
     </div>
   );

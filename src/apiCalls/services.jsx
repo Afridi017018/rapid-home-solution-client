@@ -90,8 +90,25 @@ const deleteService = async (id) => {
 }
 
 
+const getServiceRating = async (serviceId) => {
+
+    const response = await fetch(`http://localhost:4000/api/services/get-service-rating/${serviceId}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            // 'authorization': `Bearer ${localStorage.getItem("token")}`
+        },
+
+    })
+
+    const data = await response.json();
+    return data;
+
+}
 
 
 
 
-export {getAllServices, getServiceById, addService, updateService, deleteService };
+
+
+export {getAllServices, getServiceById, addService, updateService, deleteService, getServiceRating };

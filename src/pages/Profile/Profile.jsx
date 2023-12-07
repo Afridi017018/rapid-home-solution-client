@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useContext } from 'react';
+import { toast } from 'react-toastify';
 import { getUser, trackingIp, updateUser } from '../../apiCalls/users';
 import { AuthContext } from '../../components/providers/AuthProvider';
 import Loading from '../Loading/Loading';
@@ -70,17 +71,12 @@ const Profile = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // if (region === "") {
-    //   setRegion(regionIp);
-    // }
-    // if (city === "") {
-    //   console.log("region")
-    //   setRegion(cityIp);
-    // }
-
     const newData = await updateUser({ userId: user[0]._id, name, phone, region, city, area, address })
     setUser([{ ...user[0], name, phone, region, city, area, address }]);
-    // console.log('Form data:', { userId: user[0]._id, name, phone, region, city, area, address });
+
+    toast.dismiss();
+    toast.success("Successfully submitted !")
+
   };
 
   return (

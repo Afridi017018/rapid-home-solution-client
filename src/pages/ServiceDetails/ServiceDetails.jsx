@@ -5,14 +5,15 @@ import { useState } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { addToCart } from '../../apiCalls/cart';
-import { getServiceById } from '../../apiCalls/services';
+import { getServiceById, getServiceRating } from '../../apiCalls/services';
 import Comments from '../../components/Comments/Comments';
 import Faq from '../../components/Faq/Faq';
 import { AuthContext } from '../../components/providers/AuthProvider';
+import { IoPersonSharp } from "react-icons/io5";
 
 const ServiceDetails = () => {
 
-    const {user} = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
 
     const navigate = useNavigate()
 
@@ -24,6 +25,7 @@ const ServiceDetails = () => {
     // console.log(id, serviceType)
 
     const [service, setService] = useState(null)
+    const [ratingInfo, setRatingInfo] = useState(null);
 
     useEffect(() => {
         const singleService = async () => {
@@ -38,20 +40,32 @@ const ServiceDetails = () => {
     }, [id])
 
 
+    useEffect(() => {
+        const ratings = async () => {
+            const data = await getServiceRating(id);
+            // console.log(data.data)
+            setRatingInfo(data.data)
+
+        }
+
+        ratings();
+
+    }, [id])
+
+
     const handleAddToCart = async (serviceId) => {
 
         let quick;
 
-        if(serviceType === 'quick')
-        {
+        if (serviceType === 'quick') {
             quick = true;
         }
-        else{
+        else {
             quick = false;
         }
 
 
-        const data = await addToCart({ serviceId, userId: user[0]._id, quick});
+        const data = await addToCart({ serviceId, userId: user[0]._id, quick });
 
         if (data.success) {
             toast.dismiss();
@@ -75,16 +89,26 @@ const ServiceDetails = () => {
                         <div>
                             <img className='h-[400px] w-full rounded-t-md shadow-2xl' src={service.image[0].secure_url} alt="" />
                         </div>
-                        <div className='text-center bg-red-300 rounded-b-md'>
-                        
-                        {
-                            user?.length > 0 ?
-                             <button onClick={() => handleAddToCart(service._id)} className='bg-red-900 hover:bg-red-950 text-white px-3 py-1 rounded-md my-2'>Add To Cart</button>
-                             :
-                             <button onClick={() => navigate('/login')} className='bg-red-900 hover:bg-red-950 text-white px-3 py-1 rounded-md my-2'>Add To Cart</button>
-                        }
-                           
-                        </div>
+
+                            <div className='text-center bg-red-300 rounded-b-md flex '>
+                               <div className='flex justify-center items-center font-bold px-3 gap-2'>
+                                <p>{ratingInfo.avg}⭐</p>
+                                (<p className='flex'><IoPersonSharp />{ratingInfo.totalPeople}</p>)
+                               </div>
+
+                                <div className='mx-16 flex gap-3'>
+                                {
+                                    user?.length > 0 ?
+                                        <button onClick={() => handleAddToCart(service._id)} className='bg-red-900 hover:bg-red-950 text-white px-3 py-1 rounded my-2'>Add To Cart</button>
+                                        :
+                                        <button onClick={() => navigate('/login')} className='bg-red-900 hover:bg-red-950 text-white px-3 py-1 rounded my-2'>Add To Cart</button>
+                                }
+
+                                <button onClick={() => navigate('/cart')} className='bg-red-900 hover:bg-red-950 text-white px-3 py-1 rounded my-2'>Cart</button>
+                                </div>
+
+                            </div>
+                     
 
                         <div>
                             <Comments serviceId={service._id} />

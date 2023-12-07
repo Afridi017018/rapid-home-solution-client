@@ -13,7 +13,8 @@ import { useEffect } from "react";
 import { LiaCcVisa } from "react-icons/lia";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import { getCartByCartId } from "../../apiCalls/cart";
+import Swal from "sweetalert2";
+import { getCartByCartId, removeCart } from "../../apiCalls/cart";
 import { AuthContext } from "../providers/AuthProvider";
 
 
@@ -22,12 +23,15 @@ const PaymentInfo = () => {
     const { user } = useContext(AuthContext);
     const navigate = useNavigate();
 
+
     const stripe = useStripe();
     const elements = useElements();
     const cartId = useParams();
     // console.log(cartId)
 
     const [checkOutService, setCheckOutService] = useState([])
+
+
 
     useEffect(() => {
         const getCartInfo = async () => {
@@ -40,7 +44,9 @@ const PaymentInfo = () => {
         getCartInfo();
     }, [cartId])
 
+
     const handlePayment = async (event) => {
+
         // console.log(checkOutService[0].quick)
         event.preventDefault();
         if (!user[0].name || !user[0].email || !user[0].phone || !user[0].region || !user[0].city || !user[0].area || !user[0].country || !user[0].address) {
@@ -50,7 +56,7 @@ const PaymentInfo = () => {
 
 
         try {
-            const price = checkOutService[0].quick ? checkOutService[0].serviceId.price+((15/100)*checkOutService[0].serviceId.price) : checkOutService[0].serviceId.price ;
+            const price = checkOutService[0].quick ? checkOutService[0].serviceId.price + ((15 / 100) * checkOutService[0].serviceId.price) : checkOutService[0].serviceId.price;
 
             console.log(price)
             const response = await fetch('http://localhost:4000/api/orders/create-payment-intent', {
@@ -58,11 +64,12 @@ const PaymentInfo = () => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ amount:price * 100, currency: "bdt" }),
+                body: JSON.stringify({ amount: price * 100, currency: "bdt" }),
             });
 
 
             if (response.status === 200) {
+
                 const data = await response.json();
                 // console.log(data)
 
@@ -78,7 +85,7 @@ const PaymentInfo = () => {
                         userId: user[0]._id,
                         serviceId: checkOutService[0].serviceId._id,
                         paymentIntentId: confirmPayment.paymentIntent.id,
-                        
+
                         amount: checkOutService[0].quick ? checkOutService[0].serviceId.price + ((15 / 100) * checkOutService[0].serviceId.price) : checkOutService[0].serviceId.price,
 
                         quick: checkOutService[0].quick
@@ -91,13 +98,29 @@ const PaymentInfo = () => {
                         body: JSON.stringify(obj),
                     });
 
+                    await removeCart(cartId.id);
+
+                    Swal.fire({
+                        title: "Payment Successful!",
+                        text: `Transaction Id: ${confirmPayment.paymentIntent.id}`,
+                        icon: "success"
+                    });
+
                     navigate('/orders')
+
                 }
+
+
             }
         } catch (error) {
+            toast.dismiss();
+            toast.error("Payment Failed")
             console.error(error);
         }
+
+
     };
+
 
 
 
@@ -116,11 +139,11 @@ const PaymentInfo = () => {
                     checkOutService.length > 0 &&
                     <div className='text-gray-500 bg-red-50'>
                         <div className='border border-gray-100 rounded px-5 shadow-2xl py-5'>
-                            <h2 className='text-xl font-medium my-2'>Service Id : {checkOutService[0].serviceId._id}</h2>
+                            <h2 className='lg:text-xl font-medium my-2'>Service Id : {checkOutService[0].serviceId._id}</h2>
                             <hr className='w-4/5' />
-                            <h2 className='text-xl font-medium my-2'>Service Name : {checkOutService[0].serviceId.title}</h2>
+                            <h2 className='lg:text-xl font-medium my-2'>Service Name : {checkOutService[0].serviceId.title}</h2>
                             <hr className='w-4/5' />
-                            <h2 className='text-xl font-medium my-2'>Price : ${checkOutService[0].quick ? checkOutService[0].serviceId.price + ((15/ 100) * checkOutService[0].serviceId.price) : checkOutService[0].serviceId.price}</h2>
+                            <h2 className='lg:text-xl font-medium my-2'>Price : ${checkOutService[0].quick ? checkOutService[0].serviceId.price + ((15 / 100) * checkOutService[0].serviceId.price) : checkOutService[0].serviceId.price}</h2>
 
                         </div>
                     </div>

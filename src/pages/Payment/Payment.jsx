@@ -5,7 +5,7 @@ import UserAddress from '../../components/UserAddress/UserAddress';
 const Payment = () => {
     return (
         <div>
-            <div className='grid lg:grid-cols-2'>
+            <div className='grid lg:grid-cols-2 bg-green-50'>
                 <UserAddress />
                 <PaymentInfo />
             </div>

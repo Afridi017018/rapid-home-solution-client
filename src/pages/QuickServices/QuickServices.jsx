@@ -7,7 +7,7 @@ const QuickServices = () => {
     const [searchItem, setSearchItem] = useState("")
 
     return (
-        <div>
+        <div className='bg-gradient-to-r from-emerald-100 from-10% via-emerald-100 via-30% to-emerald-100 to-90%'>
             <SearchBar setSearchItem={setSearchItem} />
             <QuickCards searchItem={searchItem} />
         </div>

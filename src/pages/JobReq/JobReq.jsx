@@ -24,7 +24,7 @@ const JobReq = () => {
     }, [user, loading]);
 
     return (
-        <div className='grid grid-cols-1 lg:grid-cols-5 my-10 px-5 lg:px-8 gap-8'>
+        <div className='grid grid-cols-1 lg:grid-cols-5 py-10 px-5 lg:px-8 gap-8 bg-green-50'>
             <ApplyJob getApplications={getApplications} />
             <JobStatus applicationData={applicationData} />
         </div>

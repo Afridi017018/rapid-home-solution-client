@@ -90,7 +90,7 @@ const ServiceDetails = () => {
                             <img className='h-[400px] w-full rounded-t-md shadow-2xl' src={service.image[0].secure_url} alt="" />
                         </div>
 
-                            <div className='text-center bg-red-300 rounded-b-md flex '>
+                            <div className='text-center bg-green-300 rounded-b-md flex '>
                                <div className='flex justify-center items-center font-bold px-3 gap-2'>
                                 <p>{ratingInfo.avg}⭐</p>
                                 (<p className='flex'><IoPersonSharp />{ratingInfo.totalPeople}</p>)
@@ -99,12 +99,12 @@ const ServiceDetails = () => {
                                 <div className='mx-16 flex gap-3'>
                                 {
                                     user?.length > 0 ?
-                                        <button onClick={() => handleAddToCart(service._id)} className='bg-red-900 hover:bg-red-950 text-white px-3 py-1 rounded my-2'>Add To Cart</button>
+                                        <button onClick={() => handleAddToCart(service._id)} className='bg-green-900 hover:bg-green-950 text-white px-3 py-1 rounded my-2'>Add To Cart</button>
                                         :
-                                        <button onClick={() => navigate('/login')} className='bg-red-900 hover:bg-red-950 text-white px-3 py-1 rounded my-2'>Add To Cart</button>
+                                        <button onClick={() => navigate('/login')} className='bg-green-900 hover:bg-green-950 text-white px-3 py-1 rounded my-2'>Add To Cart</button>
                                 }
 
-                                <button onClick={() => navigate('/cart')} className='bg-red-900 hover:bg-red-950 text-white px-3 py-1 rounded my-2'>Cart</button>
+                                <button onClick={() => navigate('/cart')} className='bg-green-900 hover:bg-green-950 text-white px-3 py-1 rounded my-2'>Cart</button>
                                 </div>
 
                             </div>
@@ -117,14 +117,14 @@ const ServiceDetails = () => {
 
                     <div>
                         <div>
-                            <h2 className='text-2xl text-red-900 font-bold mb-3' >{service.title}</h2>
+                            <h2 className='text-2xl text-green-900 font-bold mb-3' >{service.title}</h2>
                             <p className='text-gray-500 break-words'>{service.description}</p>
                         </div>
 
                         <hr className='my-3' />
 
                         <div>
-                            <h2 className='text-2xl text-red-900 font-bold mb-3'>Service Details</h2>
+                            <h2 className='text-2xl text-green-900 font-bold mb-3'>Service Details</h2>
                             <div className='text-lg font-medium text-gray-500 capitalize'>
                                 <div className='flex justify-between mb-2'>
                                     <p>Category</p>
@@ -143,7 +143,7 @@ const ServiceDetails = () => {
 
                                 <div className='flex justify-between mb-2'>
                                     <p>Price</p>
-                                    <p>${service.price}</p>
+                                    <p>৳{service.price}</p>
                                 </div>
                             </div>
                         </div>
@@ -152,7 +152,7 @@ const ServiceDetails = () => {
 
 
                         <div>
-                            <h2 className='text-2xl text-red-900 font-bold mb-3'>FAQ</h2>
+                            <h2 className='text-2xl text-green-900 font-bold mb-3'>FAQ</h2>
 
                             <Faq />
                         </div>

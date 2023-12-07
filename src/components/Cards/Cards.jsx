@@ -67,7 +67,7 @@ const Cards = ({ displayFilter, setDisplayFilter, searchItem, filterItem }) => {
                         previousLabel={'Previous'}
                         nextLabel={'Next'}
                         
-                        activeClassName={'bg-red-600 px-1 rounded text-white border-solid border-2 border-red-500'}
+                        activeClassName={'bg-green-600 px-1 rounded text-white border-solid border-2 border-green-500'}
                         disabledClassName={'text-gray-400'}
                         
                     />

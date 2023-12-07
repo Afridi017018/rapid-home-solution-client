@@ -44,12 +44,12 @@ const Comments = ({ serviceId }) => {
     return (
         <div className='max-h-[420px] border my-10 overflow-auto px-1 rounded'>
             <div className='flex my-1'>
-                <input onChange={(e) => setInputComment(e.target.value)} className='border w-full focus:border-red-500 px-2 outline-none' value={inputComment} type="text" />
+                <input onChange={(e) => setInputComment(e.target.value)} className='border w-full focus:border-green-500 px-2 outline-none' value={inputComment} type="text" />
                 {
                     user?.length > 0 ?
-                        <button onClick={handleAddComment} className='bg-red-200 text-red-800 hover:bg-red-300 px-2 py-1 w-28 h-12 font-bold'>Comment</button>
+                        <button onClick={handleAddComment} className='bg-green-200 text-green-800 hover:bg-green-300 px-2 py-1 w-28 h-12 font-bold'>Comment</button>
                         :
-                        <button onClick={() => navigate('/login')} className='bg-red-200 text-red-800 hover:bg-red-300 px-2 py-1 w-28 h-12 font-bold'>Comment</button>
+                        <button onClick={() => navigate('/login')} className='bg-green-200 text-green-800 hover:bg-green-300 px-2 py-1 w-28 h-12 font-bold'>Comment</button>
                 }
             </div>
 

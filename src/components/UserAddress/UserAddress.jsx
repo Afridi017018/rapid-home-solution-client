@@ -26,14 +26,14 @@ const UserAddress = () => {
 
     return (
         <div className='my-10 mx-10'>
-            <div className='mb-3 text-2xl font-bold text-red-900'>
+            <div className='mb-3 text-2xl font-bold text-green-900'>
                 Shipping Address
             </div>
            {
               user.length > 0 &&
 
-              <div className='text-gray-500 bg-red-50'>
-                <div className='border border-gray-100 rounded px-5 shadow-2xl py-5'>
+              <div className='text-gray-500 border'>
+                <div className='border border-green-100 rounded px-5 shadow-2xl py-5'>
               <h2 className='text-xl font-medium my-2'>Name : {user[0].name}</h2>
               <hr className='w-4/5' />
               <h2 className='text-xl font-medium my-2'>Email : {user[0].email}</h2>

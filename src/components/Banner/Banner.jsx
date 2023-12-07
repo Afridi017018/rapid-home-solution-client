@@ -2,16 +2,18 @@ import React from 'react';
 
 const Banner = () => {
     return (
-        <div className="hero min-h-[600px]" style={{backgroundImage: 'url(https://daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.jpg)'}}>
-  <div className="hero-overlay bg-opacity-60"></div>
-  <div className="hero-content text-center text-neutral-content">
-    <div className="max-w-md">
-      <h1 className="mb-5 text-5xl font-bold">Hello there</h1>
-      <p className="mb-5">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
-      <button className="btn btn-primary">Get Started</button>
-    </div>
-  </div>
-</div>
+        <div className="hero min-h-[600px]" style={{ backgroundImage: 'url(https://img.freepik.com/premium-photo/plumber-s-tools-equipment-strategically-positioned-kitchen-floor-with-sink-installation-background_750630-6286.jpg?w=740)' }}>
+            <div className="hero-overlay bg-opacity-70"></div>
+            <div className="hero-content text-center text-neutral-content">
+                <div className="max-w-md text-white">
+                    <h1 className="mb-5 text-5xl font-bold">Your Solution for Swift Comfort</h1>
+                    <p className="mb-5">Experience the convenience of Rapid Home Solution – your one-stop destination for reliable and efficient online home services. Transform your living space with our expert solutions, making home maintenance a breeze.</p>
+                    <div className='mx-20'>
+                    <img className='h-32 w-72' src="/rhs-logo.png" alt="" />
+                    </div>
+                </div>
+            </div>
+        </div>
     );
 };
 

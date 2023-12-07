@@ -44,7 +44,7 @@ const OrderTable = () => {
                         <div className="overflow-x-auto">
                             <table className="table">
                                 {/* head */}
-                                <thead className='bg-red-100'>
+                                <thead className='bg-green-100'>
                                     <tr>
                                         <th>Service</th>
                                         <th>Name</th>

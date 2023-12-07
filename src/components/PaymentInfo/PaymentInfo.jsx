@@ -131,19 +131,19 @@ const PaymentInfo = () => {
     return (
         <div className="mx-10 my-10">
             <div className="w-3/4">
-                <div className='mb-3 text-2xl font-bold text-red-900'>
+                <div className='mb-3 text-2xl font-bold text-green-900'>
                     Service Information
                 </div>
 
                 {
                     checkOutService.length > 0 &&
-                    <div className='text-gray-500 bg-red-50'>
-                        <div className='border border-gray-100 rounded px-5 shadow-2xl py-5'>
+                    <div className='text-gray-500 bg-green-50'>
+                        <div className='border border-green-100 rounded px-5 shadow-2xl py-5'>
                             <h2 className='lg:text-xl font-medium my-2'>Service Id : {checkOutService[0].serviceId._id}</h2>
                             <hr className='w-4/5' />
                             <h2 className='lg:text-xl font-medium my-2'>Service Name : {checkOutService[0].serviceId.title}</h2>
                             <hr className='w-4/5' />
-                            <h2 className='lg:text-xl font-medium my-2'>Price : ${checkOutService[0].quick ? checkOutService[0].serviceId.price + ((15 / 100) * checkOutService[0].serviceId.price) : checkOutService[0].serviceId.price}</h2>
+                            <h2 className='lg:text-xl font-medium my-2'>Price : ৳{checkOutService[0].quick ? checkOutService[0].serviceId.price + ((15 / 100) * checkOutService[0].serviceId.price) : checkOutService[0].serviceId.price}</h2>
 
                         </div>
                     </div>

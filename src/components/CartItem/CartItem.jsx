@@ -37,8 +37,8 @@ const CartItem = ({element, getCartData}) => {
     }
 
     return (
-        <div className='px-5 md:px-20 my-5'>
-            <div className='flex h-56 w-full bg-red-50 border border-gray-300 rounded-md shadow-xl'>
+        <div className='px-5 md:px-20 py-5'>
+            <div className='flex h-56 w-full bg-gradient-to-r from-emerald-100 from-10% via-emerald-100 via-30% to-emerald-100 to-90% border border-gray-300 rounded-md shadow-xl'>
                 <div>
                     <img className='h-full w-44 md:w-96 rounded-l-md' src={element?.serviceId?.image[0].secure_url} alt="" />
                 </div>
@@ -48,7 +48,7 @@ const CartItem = ({element, getCartData}) => {
                     <hr />
                     <h4 className='text-lg text-gray-500 my-1'>Estimate Duration: {element.serviceId.duration} Hours</h4>
                     <h4 className='text-lg text-gray-500 my-1'>Warranty: 7 days</h4>
-                    <h4 className='text-lg text-gray-500 my-1'>Price: ${element.quick ? element.serviceId.price+((15/100)*element.serviceId.price) : element.serviceId.price }</h4>
+                    <h4 className='text-lg text-gray-500 my-1'>Price: ৳{element.quick ? element.serviceId.price+((15/100)*element.serviceId.price) : element.serviceId.price }</h4>
                     <hr />
 
                     <div className='flex gap-5 justify-center my-3 text-sm md:text-base'>

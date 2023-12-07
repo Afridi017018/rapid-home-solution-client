@@ -74,7 +74,7 @@ const Orders = () => {
                 <td className="py-2">{order._id}</td>
                 <td className="py-2">{order.serviceId.title}</td>
                 <td className="py-2">{moment(order.createdAt).format('DD/MM/YYYY, hh:mm A')}</td>
-                <td className="py-2">${order.amount}</td>
+                <td className="py-2">৳{order.amount}</td>
                 <td className="py-2">
                   <span
                     className={`inline-block py-1 px-2 rounded capitalize w-24 text-center ${order.status === 'reviewing' ? 'bg-pink-700 text-white' : order.status === 'confirmed' ? 'bg-blue-700 text-white' : order.status === 'on the way' ? 'bg-yellow-700 text-white' : order.status === 'serviced' ? 'bg-green-700 text-white' : order.status === 'canceled' ? 'text-gray-600 font-bold italic' : order.status === 'failed' ? 'bg-red-600 text-white' : 'bg-gray-700 text-white'}`}

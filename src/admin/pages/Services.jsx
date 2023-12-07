@@ -199,7 +199,7 @@ const Services = () => {
               <th>ID</th>
               <th>Service Name</th>
               <th>Category</th>
-              <th>Description</th>
+              <th></th>
               <th>Duration</th>
               <th>Price</th>
               <th>Action</th>
@@ -243,15 +243,13 @@ const Services = () => {
                   )}
                 </td>
                 <td>
-                  {editedService === service._id ? (
+                  {editedService === service._id && (
                     <input
                       type="text"
                       name="description"
                       defaultValue={service.description}
                       onChange={inputHandler}
                     />
-                  ) : (
-                    service.description
                   )}
                 </td>
                 <td>

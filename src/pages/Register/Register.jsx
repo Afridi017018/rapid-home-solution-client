@@ -39,7 +39,7 @@ const Register = () => {
     }
     
     return (
-        <div className="flex justify-center items-center h-screen bg-red-50 ">
+        <div className="flex justify-center items-center h-screen bg-green-50 ">
 
             <form className="w-full max-w-sm bg-white shadow-customShadow rounded-md  px-8 pt-6 pb-8 mb-4" onSubmit={handleRegisterSubmit}>
 
@@ -99,12 +99,12 @@ const Register = () => {
                     />
                 </div>
                 <div className="mb-4">
-                    <button className="bg-red-900 hover:bg-red-950 text-white font-bold py-2 px-4 rounded w-full" type="submit">
+                    <button className="bg-green-900 hover:bg-green-950 text-white font-bold py-2 px-4 rounded w-full" type="submit">
                         Register
                     </button>
                 </div>
                 <div className="text-center">
-                    <small className="text-gray-500">Already have an account?{" "}<Link to='/login' className="text-red-900">Login</Link></small>
+                    <small className="text-gray-500">Already have an account?{" "}<Link to='/login' className="text-green-900">Login</Link></small>
                 </div>
             </form>
         </div>

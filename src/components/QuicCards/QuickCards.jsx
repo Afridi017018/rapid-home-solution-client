@@ -83,7 +83,7 @@ const QuickCards = ({ searchItem }) => {
             {
                 services.length === 0 &&
                 <div className='flex justify-center items-center h-screen'>
-                    <img className='h-full w-2/3' src="https://img.freepik.com/free-vector/flat-design-no-data-illustration_23-2150527130.jpg?w=360&t=st=1701724047~exp=1701724647~hmac=aab069220d5640aea3694ee3b1ee73d226eeedafd936dc5a4fe57329887ecb21" alt="" />
+                    <img className='h-full w-2/3' src="https://i.ibb.co/58BLndt/nodata.png" alt="" />
                 </div>
             }
         </>

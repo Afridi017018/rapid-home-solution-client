@@ -2,6 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import Banner from '../../components/Banner/Banner';
 import Cards from '../../components/Cards/Cards';
+import ContactUs from '../../components/ContactUs/ContactUs';
 import Filters from '../../components/Filters/Filters';
 import SearchBar from '../../components/SearchBar/SearchBar';
 
@@ -33,6 +34,8 @@ const Home = () => {
                     searchItem={searchItem}
                 />
             </div>
+            
+            <ContactUs />
 
         </div>
     );

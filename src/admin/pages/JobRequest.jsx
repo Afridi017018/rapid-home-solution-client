@@ -55,7 +55,7 @@ const JobRequest = () => {
 
   return (
     <div className="bg-white p-4 rounded-sm border border-gray-200 flex-1">
-      <strong className="text-gray-700 font-medium">Job Requests</strong>
+      <strong className="text-gray-700 font-medium">View Job Requests</strong>
 
       <div className=" max-h-screen overflow-auto mt-3">
         <table className="w-full text-gray-700">

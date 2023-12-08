@@ -37,9 +37,9 @@ export const DASHBOARD_SIDEBAR_LINKS = [
 		icon: <HiOutlineUsers />
 	},
 	{
-		key: 'employee',
-		label: 'Employee',
-		path: '/employee',
+		key: 'employees',
+		label: 'Employees',
+		path: '/admin/employees',
 		icon: <HiOutlineUser />
 	},
 	{
@@ -54,11 +54,11 @@ export const DASHBOARD_SIDEBAR_LINKS = [
 		path: '/admin/faq',
 		icon: <FaQuestionCircle />
 	},
-	{
-		key: 'comments',
-		label: 'Comments',
-		path: '/comments',
-		icon: <FaCommentDots />
-	}
+	// {
+	// 	key: 'comments',
+	// 	label: 'Comments',
+	// 	path: '/comments',
+	// 	icon: <FaCommentDots />
+	// }
 ]
 

@@ -5,12 +5,12 @@ import { getFaq } from '../../apiCalls/faq';
 
 
 const Faq = () => {
-    const [faq, setFaq] = useState([]);
+    const [faqs, setFaq] = useState([]);
 
     useEffect(() => {
         const allFaqs = async () => {
             const data = await getFaq();
-            setFaq(data.faq)
+            setFaq(data.faqs)
         }
 
         allFaqs();
@@ -20,8 +20,8 @@ const Faq = () => {
     return (
         <div className='w-5/6 md:w-2/3 lg:w-5/6'>
             {
-                faq.length > 0 &&
-                faq.map((element) => (
+                faqs.length > 0 &&
+                faqs.map((element) => (
                     <div key={element._id} tabIndex={0} className="collapse rounded-md collapse-arrow border border-green-200 bg-gray-50 my-3">
                         <div className="collapse-title text-xl font-medium">
                             {element.qs}

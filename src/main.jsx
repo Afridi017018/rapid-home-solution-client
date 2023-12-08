@@ -34,6 +34,7 @@ import Users from './admin/pages/Users.jsx'
 import JobRequest from './admin/pages/JobRequest'
 import Profile from './pages/Profile/Profile.jsx';
 import JobReq from './pages/JobReq/JobReq.jsx';
+import Employees from './admin/pages/Employee.jsx';
 
 import 'react-pure-modal/dist/react-pure-modal.min.css';
 import QuickServices from './pages/QuickServices/QuickServices.jsx';
@@ -137,6 +138,10 @@ const router = createBrowserRouter([
       {
         path: "faq",
         element: <PrivateRoute><AdminRoute><Faq /></AdminRoute></PrivateRoute>,
+      },
+      {
+        path: "employees",
+        element: <PrivateRoute><AdminRoute><Employees /></AdminRoute></PrivateRoute>,
       }
     ]
   }

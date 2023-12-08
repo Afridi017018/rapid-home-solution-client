@@ -1,41 +1,52 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
 import { AiFillEdit } from "react-icons/ai";
 import { MdDeleteForever } from "react-icons/md";
 import { RxUpdate } from "react-icons/rx";
+import { addEmployee, deleteEmployee, getAllEmployees, updateEmployee } from "../../apiCalls/employees";
+import Loading from "../../pages/Loading/Loading";
 
-const Employees = () => {
-  const initialEmployeeState = [
-    { id: 1, name: "John Doe", address: "123 Main St", phone: "555-123-4567" },
-    { id: 2, name: "Jane Smith", address: "456 Elm St", phone: "555-987-6543" },
-    { id: 3, name: "Bob Johnson", address: "789 Oak St", phone: "555-567-8901" },
-  ];
+const  Employees = () => {
 
-  const [employees, setEmployees] = useState(initialEmployeeState);
+  const [employees, setEmployees] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+
+  const getEmployees = async () => {
+    setIsLoading(true);
+    const data = await getAllEmployees();
+    setEmployees(data.employees);
+    setIsLoading(false)
+  }
+
+
+  useEffect(() => {
+    getEmployees();
+
+  }, [])
+
+  const employeeSubmit = async (e) => {
+    e.preventDefault();
+
+    const data = await addEmployee({
+      name: e.target.name.value,
+      address: e.target.address.value,
+      phone: e.target.phone.value,
+    });
+    getEmployees();
+  };
+
+
+
   const [editedEmployee, setEditedEmployee] = useState(null);
   const [inputState, setInputState] = useState({});
 
-  const employeeSubmit = (e) => {
-    e.preventDefault();
-    const form = e.target;
-    const name = form.name.value;
-    const address = form.address.value;
-    const phone = form.phone.value;
+  
 
-    const newEmployee = {
-      id: employees.length + 1,
-      name,
-      address,
-      phone,
-    };
+  const handleDelete = async (id) => {
+   const data = await deleteEmployee(id);
+   getEmployees();
 
-    const addedEmployees = [...employees, newEmployee];
-
-    setEmployees(addedEmployees);
-    form.reset();
-  };
-
-  const handleDelete = (id) => {
-    setEmployees(employees.filter((employee) => employee.id !== id));
   };
 
   const editButtonHandler = (id) => {
@@ -47,20 +58,29 @@ const Employees = () => {
     setInputState({ ...inputState, [name]: value });
   };
 
-  const saveEmployee = (id) => {
-    const updatedEmployees = employees.map((employee) => {
-      if (employee.id === id) {
-        employee.name = inputState.name || employee.name;
-        employee.address = inputState.address || employee.address;
-        employee.phone = inputState.phone || employee.phone;
-      }
-      return employee;
-    });
+  const saveEmployee = async (id) => {
 
-    setEmployees(updatedEmployees);
+    const editedEmployee = employees.find((employee) => employee._id === id);
+
+    const updatedEmployee = {
+      id: editedEmployee._id,
+      name: inputState.name || editedEmployee.name,
+      address: inputState.address || editedEmployee.address,
+      phone: inputState.phone || editedEmployee.phone,
+    }
+
+    const data = await updateEmployee(updatedEmployee);
+    getEmployees();
+
     setEditedEmployee(null);
-    setInputState({});
   };
+
+
+
+  if (isLoading) {
+    return <Loading />
+  }
+
 
   return (
     <div className="bg-white px-4 pt-3 pb-4 rounded-sm border border-gray-200 flex-1">
@@ -101,8 +121,8 @@ const Employees = () => {
       </div>
 
       <strong className="text-gray-700 font-medium">View Employees</strong>
-      <div className="border-x border-gray-200 rounded-sm mt-3">
-        <table className="w-full text-gray-700">
+      <div className="border-x border-gray-200 rounded-sm mt-3 overflow-auto sticky top-0 h-[95vh]">
+        <table className="w-full text-gray-700 text-xs">
           <thead>
             <tr>
               <th>ID</th>
@@ -114,10 +134,10 @@ const Employees = () => {
           </thead>
           <tbody>
             {employees.map((employee) => (
-              <tr key={employee.id}>
-                <td>{employee.id}</td>
+              <tr key={employee._id}>
+                <td>{employee._id}</td>
                 <td>
-                  {editedEmployee === employee.id ? (
+                  {editedEmployee === employee._id ? (
                     <input
                       type="text"
                       name="name"
@@ -127,9 +147,9 @@ const Employees = () => {
                   ) : (
                     employee.name
                   )}
-                </td>
+                </td> 
                 <td>
-                  {editedEmployee === employee.id ? (
+                  {editedEmployee === employee._id ? (
                     <input
                       type="text"
                       name="address"
@@ -141,7 +161,7 @@ const Employees = () => {
                   )}
                 </td>
                 <td>
-                  {editedEmployee === employee.id ? (
+                  {editedEmployee === employee._id ? (
                     <input
                       type="text"
                       name="phone"
@@ -153,24 +173,24 @@ const Employees = () => {
                   )}
                 </td>
                 <td>
-                  {editedEmployee === employee.id ? (
+                  {editedEmployee === employee._id ? (
                     <button
                       className="bg-green-500 hover:bg-green-700 text-white py-1 px-2 rounded font-bold mr-1"
-                      onClick={() => saveEmployee(employee.id)}
+                      onClick={() => saveEmployee(employee._id)}
                     >
                       <RxUpdate />
                     </button>
                   ) : (
                     <button
                       className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded mr-1"
-                      onClick={() => editButtonHandler(employee.id)}
+                      onClick={() => editButtonHandler(employee._id)}
                     >
                       <AiFillEdit />
                     </button>
                   )}
                   <button
                     className="bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded font-bold"
-                    onClick={() => handleDelete(employee.id)}
+                    onClick={() => handleDelete(employee._id)}
                   >
                     <MdDeleteForever />
                   </button>

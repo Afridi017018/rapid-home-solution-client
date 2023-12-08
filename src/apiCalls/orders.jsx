@@ -47,6 +47,28 @@ const getAllOrders = async()=>{
     return data;
 }
 
+
+
+
+const getRecentOrders = async()=>{
+    const response = await fetch(`http://localhost:4000/api/orders/get-recent-orders`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'authorization': `Bearer ${localStorage.getItem("token")}`
+        },
+ 
+
+    })
+
+    const data = await response.json();
+    return data;
+}
+
+
+
+
+
 const updateOrderStatus = async (obj) => {
     const response = await fetch(`http://localhost:4000/api/orders/update-order-status`, {
         method: 'PUT',
@@ -64,4 +86,4 @@ const updateOrderStatus = async (obj) => {
 
 
 
-export  {getOrders, updateRating, getAllOrders, updateOrderStatus};
+export  {getOrders, updateRating, getAllOrders, updateOrderStatus, getRecentOrders};

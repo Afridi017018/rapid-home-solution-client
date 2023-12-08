@@ -109,7 +109,7 @@ useEffect(() => {
         <table className="w-full text-gray-700">
           <thead>
             <tr>
-              <th>ID</th>
+              {/* <th>ID</th> */}
               <th>Question</th>
               <th>Answer</th>
               <th>Action</th>
@@ -118,7 +118,7 @@ useEffect(() => {
           <tbody>
             {faqs.map((faq) => (
               <tr key={faq._id}>
-                <td>{faq._id}</td>
+                {/* <td>{faq._id}</td> */}
                 <td className="whitespace-normal">
                   {editedFAQ === faq._id ? (
                     <input

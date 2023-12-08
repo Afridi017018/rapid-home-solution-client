@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
-import { getAllOrders, updateOrderStatus } from '../../apiCalls/orders';
-import Loading from '../../pages/Loading/Loading';
+
 import moment from 'moment'
+import { getRecentOrders } from '../../apiCalls/orders';
 
 const RecentOrders = () => {
   // const [isLoading, setIsLoading] = useState(true)
@@ -10,48 +10,21 @@ const RecentOrders = () => {
 
 
 
-  const getAllOrderData = async () => {
+  const getRecentOrderData = async () => {
     // setIsLoading(true);
-    const data = await getAllOrders();
+    const data = await getRecentOrders();
     // console.log(data.orders);
     setOrders(data.orders)
     // setIsLoading(false)
   }
 
   useEffect(() => {
-    getAllOrderData();
+    getRecentOrderData();
   }, [])
 
 
 
-  // if(isLoading)
-  // {
-  //   return <Loading />
-  // }
-
-
-  const currentStatus = [
-    "pending",
-    "reviewing",
-    "confirmed",
-    "on the way",
-    "serviced",
-    "canceled",
-    "failed"
-  ]
-
-
-
-  const handleChangedStatus = async (orderId, status)=>{
-
-    // console.log(orderId,status);
-    const data = await updateOrderStatus({orderId, status});
-    // console.log(data);
-
-    getAllOrderData();
-    
-
-  }
+  
 
   return (
     <div className="bg-white px-4 pt-3 pb-4 rounded-sm border border-gray-200 flex-1 overflow-x-auto">

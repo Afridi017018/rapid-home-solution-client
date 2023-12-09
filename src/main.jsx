@@ -13,10 +13,7 @@ import Login from './pages/Login/Login.jsx';
 import Register from './pages/Register/Register.jsx';
 import Home from './pages/Home/Home.jsx';
 import ServiceDetails from './pages/ServiceDetails/ServiceDetails.jsx';
-import Test from './pages/Test/Test.jsx';
 
-
-///
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import Cart from './pages/Cart/Cart.jsx';
@@ -41,7 +38,7 @@ import QuickServices from './pages/QuickServices/QuickServices.jsx';
 import ErrorPage from './pages/ErrorPage/ErrorPage.jsx';
 
 
-const stripePromise = loadStripe(`pk_test_51NxsVnLDN7M5wmwbD25KOthKGcCIboO8nzde202QJWvKeb55zHfb70SehpOVnB3mL9PtR3VEvalwWMtPxOMCpCW000Iyq1CBCV`);
+const stripePromise = loadStripe(import.meta.env.VITE_Payment_Gateway_PK);
 
 
 const router = createBrowserRouter([
@@ -92,21 +89,9 @@ const router = createBrowserRouter([
       {
         path: "/paymentInfo/:id",
         element: <PrivateRoute><Elements stripe={stripePromise} ><Payment /></Elements></PrivateRoute>,
-        // element: <div>hiiiiiiiiiiiiii</div>,
+
       },
-      // {
-      //   path: "/payment/:id",
-      //   element: <Payment />,
-      //   // element: <div>hiiiiiiiiiiiiii</div>,
-      // },
-      // {
-      //   path: "/success",
-      //   element: <div>Order success!!!!!!!</div>,
-      // },
-      // {
-      //   path: "/cancel",
-      //   element: <div>Order Cancel  !!!!!!!</div>,
-      // },
+
     ],
   },
 
@@ -158,9 +143,9 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
 
-      <AuthProvider>
-        <RouterProvider router={router} />
-      </AuthProvider>
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
 
   </React.StrictMode>,
 )

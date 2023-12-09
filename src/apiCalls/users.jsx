@@ -103,7 +103,7 @@ const updateRole = async (obj) => {
 
 
 const trackingIp = async () => {
-    const request = await fetch("https://ipinfo.io/json?token=5bcac1461564b5")
+    const request = await fetch(`https://ipinfo.io/json?token=${import.meta.env.VITE_IP_TOKEN}`)
     const jsonResponse = await request.json()
 
     return jsonResponse;

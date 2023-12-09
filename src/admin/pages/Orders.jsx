@@ -56,7 +56,7 @@ const Orders = () => {
   return (
     <div className="bg-white px-4 pt-3 pb-4 rounded-sm border border-gray-200 flex-1 overflow-x-auto">
       <strong className="text-gray-700 font-medium">View Orders</strong>
-      <div className="border-x border-gray-200 rounded-sm mt-3 overflow-x-auto">
+      <div className="border-x border-gray-200 rounded-sm mt-3 overflow-x-auto sticky top-0 h-[95vh]">
         <table className="w-full min-w-max">
           <thead>
             <tr>

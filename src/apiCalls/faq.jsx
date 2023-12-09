@@ -1,9 +1,9 @@
 const getFaq = async () => {
-    const response = await fetch(`http://localhost:4000/api/services/get-faq`, {
+    const response = await fetch(`https://rapid-home-solution-server.vercel.app/api/services/get-faq`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
-            // 'authorization': `Bearer ${localStorage.getItem("token")}`
+            'authorization': `Bearer ${localStorage.getItem("token")}`
         },
         // body: JSON.stringify(obj)
 
@@ -16,11 +16,11 @@ const getFaq = async () => {
 
 
 const addFaq = async (obj) => {
-    const response = await fetch(`http://localhost:4000/api/services/add-faq`, {
+    const response = await fetch(`https://rapid-home-solution-server.vercel.app/api/services/add-faq`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            //'authorization': `Bearer ${localStorage.getItem("token")}`
+            'authorization': `Bearer ${localStorage.getItem("token")}`
         },
         body: JSON.stringify(obj)
 
@@ -33,7 +33,7 @@ const addFaq = async (obj) => {
 
 
 const updateFaq = async (obj) => {
-    const response = await fetch(`http://localhost:4000/api/services/update-faq`, {
+    const response = await fetch(`https://rapid-home-solution-server.vercel.app/api/services/update-faq`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -50,7 +50,7 @@ const updateFaq = async (obj) => {
 
 
 const deleteFaq = async (id) => {
-    const response = await fetch(`http://localhost:4000/api/services/delete-faq/${id}`, {
+    const response = await fetch(`https://rapid-home-solution-server.vercel.app/api/services/delete-faq/${id}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',

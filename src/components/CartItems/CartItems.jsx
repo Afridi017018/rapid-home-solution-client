@@ -25,7 +25,7 @@ const CartItems = () => {
     return (
         <div className='min-h-[553px]'>
             {
-                cart.length > 0 ?
+                cart?.length > 0 ?
                     cart.map((element) => (
                         <CartItem key={element._id} element={element} getCartData={getCartData} />
                     ))

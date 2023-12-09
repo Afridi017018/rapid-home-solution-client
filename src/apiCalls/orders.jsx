@@ -1,9 +1,9 @@
 const getOrders = async(userId)=>{
-    const response = await fetch(`http://localhost:4000/api/orders/get-orders/${userId}`, {
+    const response = await fetch(`https://rapid-home-solution-server.vercel.app/api/orders/get-orders/${userId}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
-            // 'authorization': `Bearer ${localStorage.getItem("token")}`
+            'authorization': `Bearer ${localStorage.getItem("token")}`
         },
         // body: JSON.stringify(obj)
 
@@ -16,11 +16,11 @@ const getOrders = async(userId)=>{
 
 
 const updateRating = async (obj) => {
-    const response = await fetch(`http://localhost:4000/api/orders/update-rating`, {
+    const response = await fetch(`https://rapid-home-solution-server.vercel.app/api/orders/update-rating`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
-            // 'authorization': `Bearer ${localStorage.getItem("token")}`
+            'authorization': `Bearer ${localStorage.getItem("token")}`
         },
         body: JSON.stringify(obj)
 
@@ -33,7 +33,7 @@ const updateRating = async (obj) => {
 
 
 const getAllOrders = async()=>{
-    const response = await fetch(`http://localhost:4000/api/orders/get-all-orders`, {
+    const response = await fetch(`https://rapid-home-solution-server.vercel.app/api/orders/get-all-orders`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -51,7 +51,7 @@ const getAllOrders = async()=>{
 
 
 const getRecentOrders = async()=>{
-    const response = await fetch(`http://localhost:4000/api/orders/get-recent-orders`, {
+    const response = await fetch(`https://rapid-home-solution-server.vercel.app/api/orders/get-recent-orders`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -70,7 +70,7 @@ const getRecentOrders = async()=>{
 
 
 const updateOrderStatus = async (obj) => {
-    const response = await fetch(`http://localhost:4000/api/orders/update-order-status`, {
+    const response = await fetch(`https://rapid-home-solution-server.vercel.app/api/orders/update-order-status`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',

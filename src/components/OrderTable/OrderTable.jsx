@@ -39,7 +39,7 @@ const OrderTable = () => {
         <div className='min-h-[450px]'>
 
             {
-                orders.length > 0 ?
+                orders?.length > 0 ?
                     <div className='container mx-auto my-10 shadow-2xl border'>
                         <div className="overflow-x-auto">
                             <table className="table">
@@ -71,7 +71,7 @@ const OrderTable = () => {
                                                         element.servicedAt ?
                                                             <p>Serviced: {moment(element.servicedAt).format('DD/MM/YY, h:mm A')}</p>
                                                             :
-                                                            <p>Estimate: {moment(element.createdAt).add(4, 'day').format('DD/MM/YY')}</p>
+                                                            <p>Estimated: {moment(element.createdAt).add(4, 'day').format('DD/MM/YY')}</p>
                                                     }
                                                 </td>
 

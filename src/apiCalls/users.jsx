@@ -85,6 +85,23 @@ const updateUser = async (obj) => {
 }
 
 
+const updateRole = async (obj) => {
+
+    const response = await fetch(`http://localhost:4000/api/user/update-role`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(obj)
+
+    })
+
+    const data = await response.json();
+    return data;
+
+}
+
+
 const trackingIp = async () => {
     const request = await fetch("https://ipinfo.io/json?token=5bcac1461564b5")
     const jsonResponse = await request.json()
@@ -93,4 +110,4 @@ const trackingIp = async () => {
 }
 
 
-export { userRegister, userLogin, getUser, getAllUsers, updateUser, trackingIp };
+export { userRegister, userLogin, getUser, getAllUsers, updateUser, trackingIp, updateRole };

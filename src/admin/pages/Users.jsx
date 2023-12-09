@@ -1,35 +1,40 @@
 import React, { useState } from 'react';
-import { ImBlocked } from 'react-icons/im';
-import { CgUnblock } from 'react-icons/cg';
 import { useEffect } from 'react';
-import { getAllUsers } from '../../apiCalls/users';
+import { getAllUsers, updateRole } from '../../apiCalls/users';
+import { FaUser } from "react-icons/fa";
+import { RiAdminFill } from "react-icons/ri";
 
 const Users = () => {
   const [users, setUsers] = useState([]);
 
-  useEffect(()=>{
-    const getUsers = async()=>{
-      const data = await getAllUsers();
-      setUsers(data.usersData)
-    }
+  const getUsers = async () => {
+    const data = await getAllUsers();
+    setUsers(data.usersData)
+  }
 
+  useEffect(() => {
+    
     getUsers();
 
-  },[])
+  }, [])
 
-  const toggleStatus = (userId) => {
-    setUsers(users.map(user => {
-      if (user.id === userId) {
-        user.status = user.status === 'active' ? 'blocked' : 'active';
-      }
-      return user;
-    }));
-  };
+  const handleMakeAdmin = async (userId) => {
+    await updateRole({ userId, role: "admin" });
+
+    getUsers();
+  }
+
+  const handleMakeUser = async (userId) => {
+    await updateRole({ userId, role: "user" });
+
+    getUsers();
+  }
+
 
   return (
     <div className="bg-white px-4 pt-3 pb-4 rounded-sm border border-gray-200 flex-1 overflow-x-auto">
       <strong className="text-gray-700 font-medium">View Users</strong>
-      <div className="border-x border-gray-200 rounded-sm mt-3">
+      <div className="border-x border-gray-200 rounded-sm mt-3 overflow-x-auto sticky top-0 h-[95vh]">
         <table className="w-full text-gray-700">
           <thead>
             <tr>
@@ -46,17 +51,25 @@ const Users = () => {
                 <td>{user._id}</td>
                 <td>{user.name}</td>
                 <td>{user.email}</td>
-                <td>
-                  <span 
-                    className={`inline-block py-1 px-2 rounded ${user.status === 'active' ? 'bg-teal-200 text-teal-700' : 'bg-rose-200 text-rose-700'}`}
-                  >
-                    {user.status}
-                  </span>
+                <td className='text-xl'>
+                  {
+                    user.role === "admin" &&
+                    <RiAdminFill className='text-red-600' />
+                  }
+                  {
+                    user.role === "user" &&
+                    <FaUser className='text-blue-600' />
+                  }
                 </td>
                 <td>
-                  <button className="bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded" onClick={() => toggleStatus(user.id)}>
-                    {user.status === 'active' ? <ImBlocked /> : <CgUnblock />}
-                  </button>
+                  {
+                    user.role === "admin" &&
+                    <button onClick={() => handleMakeUser(user._id)} className='py-1 rounded text-xs w-20 lg:w-24 lg:text-sm bg-blue-600 text-white'>Make User</button>
+                  }
+                  {
+                    user.role === "user" &&
+                    <button onClick={() => handleMakeAdmin(user._id)} className='py-1 rounded text-xs w-20 lg:w-24 lg:text-sm bg-red-600 text-white'>Make Admin</button>
+                  }
                 </td>
               </tr>
             ))}

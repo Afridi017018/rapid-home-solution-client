@@ -70,6 +70,8 @@ useEffect(() => {
     getFAQs();
   };
 
+  
+
 
 
   if(isLoading) {
@@ -104,7 +106,8 @@ useEffect(() => {
           </form>
         </div>
       </div>
-      <strong className="text-gray-700 font-medium">View FAQs</strong>
+
+      <strong className="text-gray-700 font-medium mb-2">View FAQs</strong>
       <div className="overflow-x-auto border-x border-gray-200 rounded mb-4">
         <table className="w-full text-gray-700">
           <thead>

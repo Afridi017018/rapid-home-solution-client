@@ -1,12 +1,12 @@
 import React from 'react';
 import { useContext } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../providers/AuthProvider';
 
 const Navbar = () => {
 
     const { user, handleLogout } = useContext(AuthContext)
-    // console.log(user)
+    const navigate = useNavigate("/");
 
     const list = <div className='lg:flex text-lg font-semibold lg:gap-5'>
         <li><NavLink
@@ -97,7 +97,7 @@ const Navbar = () => {
                             }
                         </ul>
                     </div>
-                    <div><img className='h-24 w-44' src="/rhs-logo.png" alt="" /></div>
+                    <div><img onClick={()=> navigate('/')} className='h-24 w-44 cursor-pointer' src="/rhs-logo.png" alt="" /></div>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu-horizontal px-1">

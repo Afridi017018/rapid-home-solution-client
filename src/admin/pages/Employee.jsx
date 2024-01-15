@@ -10,6 +10,7 @@ const  Employees = () => {
 
   const [employees, setEmployees] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState('');
 
 
   const getEmployees = async () => {
@@ -75,6 +76,19 @@ const  Employees = () => {
     setEditedEmployee(null);
   };
 
+  const handleSearch = () => {
+    if (searchTerm) {
+      const filteredEmployees = employees.filter((employee) =>
+        employee._id.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setEmployees(filteredEmployees);
+    } else {
+      getEmployees();
+    }
+  };
+
+  
+
 
 
   if (isLoading) {
@@ -120,7 +134,21 @@ const  Employees = () => {
         </div>
       </div>
 
-      <strong className="text-gray-700 font-medium">View Employees</strong>
+      <div className="flex justify-between items-center mb-3">
+        <strong className="text-gray-700 font-medium">View Employee</strong>
+        <div className="flex items-center">
+          <input
+            type="text"
+            placeholder="Search Here ..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="border mr-2 px-3 py-1 rounded w-[14rem]"
+          />
+          <button onClick={handleSearch} className="bg-blue-500 text-white px-3 py-1 rounded">
+            Search
+          </button>
+        </div>
+      </div>
       <div className="border-x border-gray-200 rounded-sm mt-3 overflow-auto sticky top-0 h-[95vh]">
         <table className="w-full text-gray-700 text-xs">
           <thead>

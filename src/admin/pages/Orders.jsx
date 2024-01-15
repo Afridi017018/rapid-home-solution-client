@@ -1,34 +1,19 @@
-import React, { useState } from 'react';
-import { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { getAllOrders, updateOrderStatus } from '../../apiCalls/orders';
-import Loading from '../../pages/Loading/Loading';
-import moment from 'moment'
+import moment from 'moment';
 
 const Orders = () => {
-  // const [isLoading, setIsLoading] = useState(true)
   const [orders, setOrders] = useState([]);
-
-
+  const [searchTerm, setSearchTerm] = useState('');
 
   const getAllOrderData = async () => {
-    // setIsLoading(true);
     const data = await getAllOrders();
-    // console.log(data.orders);
-    setOrders(data.orders)
-    // setIsLoading(false)
-  }
+    setOrders(data.orders);
+  };
 
   useEffect(() => {
     getAllOrderData();
-  }, [])
-
-
-
-  // if(isLoading)
-  // {
-  //   return <Loading />
-  // }
-
+  }, []);
 
   const currentStatus = [
     "pending",
@@ -38,25 +23,44 @@ const Orders = () => {
     "serviced",
     "canceled",
     "failed"
-  ]
+  ];
 
-
-
-  const handleChangedStatus = async (orderId, status)=>{
-
-    // console.log(orderId,status);
-    const data = await updateOrderStatus({orderId, status});
-    // console.log(data);
-
+  const handleChangedStatus = async (orderId, status) => {
+    const data = await updateOrderStatus({ orderId, status });
     getAllOrderData();
-    
+  };
 
-  }
+  const handleSearch = () => {
+    if (searchTerm) {
+      const filteredOrders = orders.filter((order) =>
+        order._id.toLowerCase().includes(searchTerm.toLowerCase())
+        
+      );
+      setOrders(filteredOrders);
+    } else {
+      getAllOrderData();
+    }
+  };
 
   return (
     <div className="bg-white px-4 pt-3 pb-4 rounded-sm border border-gray-200 flex-1 overflow-x-auto">
-      <strong className="text-gray-700 font-medium">View Orders</strong>
-      <div className="border-x border-gray-200 rounded-sm mt-3 overflow-x-auto sticky top-0 h-[95vh]">
+      <div className="flex justify-between items-center mb-3">
+        <strong className="text-gray-700 font-medium">View Orders</strong>
+        <div className="flex items-center">
+          <input
+            type="text"
+            placeholder="Search Here ..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="border mr-2 px-3 py-1 rounded w-[14rem]"
+          />
+          <button onClick={handleSearch} className="bg-blue-500 text-white px-3 py-1 rounded">
+            Search
+          </button>
+        </div>
+      </div>
+
+      <div className="border-x border-gray-200 rounded-sm mt-3 overflow-x-auto">
         <table className="w-full min-w-max">
           <thead>
             <tr>
@@ -78,26 +82,23 @@ const Orders = () => {
                 <td className="py-2">
                   <span
                     className={`inline-block py-1 px-2 rounded capitalize w-24 text-center ${order.status === 'reviewing' ? 'bg-pink-700 text-white' : order.status === 'confirmed' ? 'bg-blue-700 text-white' : order.status === 'on the way' ? 'bg-yellow-700 text-white' : order.status === 'serviced' ? 'bg-green-700 text-white' : order.status === 'canceled' ? 'text-gray-600 font-bold italic' : order.status === 'failed' ? 'bg-red-600 text-white' : 'bg-gray-700 text-white'}`}
-                    
                   >
                     {order.status}
                   </span>
                 </td>
                 <td className="py-2">
-
                   <select
-                  name='status'
-                  defaultValue={order.status}
-                  className="w-full border p-2 rounded capitalize"
-                  onChange={(e)=>handleChangedStatus(order._id, e.target.value)}
+                    name='status'
+                    defaultValue={order.status}
+                    className="w-full border p-2 rounded capitalize"
+                    onChange={(e) => handleChangedStatus(order._id, e.target.value)}
                   >
-                 {
-                  currentStatus.map((element)=>(
-                    <option key={element} value={element} className="capitalize">{element}</option>
-                  ))
-                 }
+                    {currentStatus.map((element) => (
+                      <option key={element} value={element} className="capitalize">
+                        {element}
+                      </option>
+                    ))}
                   </select>
-
                 </td>
               </tr>
             ))}

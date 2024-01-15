@@ -6,6 +6,7 @@ import { RiAdminFill } from "react-icons/ri";
 
 const Users = () => {
   const [users, setUsers] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
 
   const getUsers = async () => {
     const data = await getAllUsers();
@@ -30,10 +31,38 @@ const Users = () => {
     getUsers();
   }
 
+  const handleSearch = () => {
+    if (searchTerm) {
+      const filteredUsers = users.filter((user) =>
+        user._id.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setUsers(filteredUsers);
+    } else {
+      getUsers();
+    }
+  };
+  
+
+
+
 
   return (
     <div className="bg-white px-4 pt-3 pb-4 rounded-sm border border-gray-200 flex-1 overflow-x-auto">
-      <strong className="text-gray-700 font-medium">View Users</strong>
+      <div className="flex justify-between items-center mb-3">
+        <strong className="text-gray-700 font-medium">View Users</strong>
+        <div className="flex items-center">
+          <input
+            type="text"
+            placeholder="Search Here ..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="border mr-2 px-3 py-1 rounded w-[14rem]"
+          />
+          <button onClick={handleSearch} className="bg-blue-500 text-white px-3 py-1 rounded">
+            Search
+          </button>
+        </div>
+      </div>
       <div className="border-x border-gray-200 rounded-sm mt-3 overflow-x-auto sticky top-0 h-[95vh]">
         <table className="w-full text-gray-700">
           <thead>

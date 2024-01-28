@@ -43,6 +43,12 @@ export const DASHBOARD_SIDEBAR_LINKS = [
 		icon: <HiOutlineUser />
 	},
 	{
+		key: 'employee_list',
+		label: 'Employees',
+		path: '/admin/employee-list',
+		icon: <HiOutlineUser />
+	},
+	{
 		key: 'job',
 		label: 'Job Request',
 		path: '/admin/job',
@@ -60,5 +66,30 @@ export const DASHBOARD_SIDEBAR_LINKS = [
 	// 	path: '/comments',
 	// 	icon: <FaCommentDots />
 	// }
+
+
+]
+
+
+export const DASHBOARD_SIDEBAR_LINKS_EMPLOYEE = [
+
+	{
+		key: 'profile',
+		label: 'Profile',
+		path: '/employee',
+		icon: <FaQuestionCircle />
+	},
+	{
+		key: 'ongoing',
+		label: 'Ongoing',
+		path: '/employee/ongoing',
+		icon: <FaQuestionCircle />
+	},
+	{
+		key: 'history',
+		label: 'History',
+		path: '/employee/history',
+		icon: <FaQuestionCircle />
+	},
 ]
 

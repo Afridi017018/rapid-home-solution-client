@@ -36,6 +36,10 @@ import Employees from './admin/pages/Employee.jsx';
 import 'react-pure-modal/dist/react-pure-modal.min.css';
 import QuickServices from './pages/QuickServices/QuickServices.jsx';
 import ErrorPage from './pages/ErrorPage/ErrorPage.jsx';
+import EmployeeRoute from './EmployeeRoute.jsx';
+import EmployeeList from './admin/pages/EmployeeList.jsx';
+import Ongoing from './Employee/Pages/Ongoing.jsx';
+import WorkHistory from './Employee/Pages/WorkHistory.jsx';
 
 
 const stripePromise = loadStripe(import.meta.env.VITE_Payment_Gateway_PK);
@@ -127,9 +131,57 @@ const router = createBrowserRouter([
       {
         path: "employees",
         element: <PrivateRoute><AdminRoute><Employees /></AdminRoute></PrivateRoute>,
+      },
+      {
+        path: "employee-list",
+        element: <PrivateRoute><AdminRoute><EmployeeList /></AdminRoute></PrivateRoute>,
       }
     ]
+  },
+
+
+
+  {
+    path: "/employee",
+    element: <PrivateRoute><EmployeeRoute><Layout /></EmployeeRoute></PrivateRoute>,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        index: true,
+        element: <PrivateRoute><EmployeeRoute><Profile /></EmployeeRoute></PrivateRoute>,
+      },
+      {
+        path: "ongoing",
+        element: <PrivateRoute> <EmployeeRoute><Ongoing /></EmployeeRoute> </PrivateRoute>,
+      },
+      {
+        path: "history",
+        element: <PrivateRoute> <EmployeeRoute><WorkHistory /></EmployeeRoute> </PrivateRoute>,
+      },
+      // {
+      //   path: "orders",
+      //   element: <PrivateRoute><AdminRoute><Orders /></AdminRoute></PrivateRoute>,
+      // },
+      // {
+      //   path: "users",
+      //   element: <PrivateRoute><AdminRoute><Users /></AdminRoute></PrivateRoute>,
+      // },
+      // {
+      //   path: "job",
+      //   element: <PrivateRoute><AdminRoute><JobRequest /></AdminRoute></PrivateRoute>,
+      // },
+      // {
+      //   path: "faq",
+      //   element: <PrivateRoute><AdminRoute><Faq /></AdminRoute></PrivateRoute>,
+      // },
+      // {
+      //   path: "employees",
+      //   element: <PrivateRoute><AdminRoute><Employees /></AdminRoute></PrivateRoute>,
+      // }
+    ]
   }
+
+
 ]);
 
 

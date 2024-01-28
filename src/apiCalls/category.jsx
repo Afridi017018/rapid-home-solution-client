@@ -1,6 +1,6 @@
 
 const addCategory = async (obj) => {
-    const response = await fetch(`https://rapid-home-solution-server.vercel.app/api/services/add-category`, {
+    const response = await fetch(`http://localhost:4000/api/services/add-category`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -16,7 +16,7 @@ const addCategory = async (obj) => {
 
 
 const getAllCategories = async () => {
-    const response = await fetch(`https://rapid-home-solution-server.vercel.app/api/services/get-all-categories`, {
+    const response = await fetch(`http://localhost:4000/api/services/get-all-categories`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',

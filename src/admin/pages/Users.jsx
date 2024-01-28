@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { getAllUsers, updateRole } from '../../apiCalls/users';
 import { FaUser } from "react-icons/fa";
 import { RiAdminFill } from "react-icons/ri";
+import { GrUserWorker } from "react-icons/gr";
 
 const Users = () => {
   const [users, setUsers] = useState([]);
@@ -11,6 +12,7 @@ const Users = () => {
   const getUsers = async () => {
     const data = await getAllUsers();
     setUsers(data.usersData)
+    // console.log(data.usersData)
   }
 
   useEffect(() => {
@@ -27,6 +29,12 @@ const Users = () => {
 
   const handleMakeUser = async (userId) => {
     await updateRole({ userId, role: "user" });
+
+    getUsers();
+  }
+
+  const handleMakeEmployee = async (userId) => {
+    await updateRole({ userId, role: "employee" });
 
     getUsers();
   }
@@ -83,21 +91,32 @@ const Users = () => {
                 <td className='text-xl'>
                   {
                     user.role === "admin" &&
-                    <RiAdminFill className='text-red-600' />
+                    <RiAdminFill className='text-red-700' />
                   }
                   {
                     user.role === "user" &&
-                    <FaUser className='text-blue-600' />
+                    <FaUser className='text-blue-700' />
                   }
+                  {
+                    user.role === "employee" &&
+                    <GrUserWorker className='text-green-700' />
+                  }
+                  
                 </td>
                 <td>
                   {
-                    user.role === "admin" &&
-                    <button onClick={() => handleMakeUser(user._id)} className='py-1 rounded text-xs w-20 lg:w-24 lg:text-sm bg-blue-600 text-white'>Make User</button>
+                    // user.role === "admin" &&
+                    <button onClick={() => handleMakeUser(user._id)} className='py-1 rounded text-xs w-20 lg:w-24 lg:text-sm bg-blue-700 text-white mr-1'>Make User</button>
                   }
+                
                   {
-                    user.role === "user" &&
-                    <button onClick={() => handleMakeAdmin(user._id)} className='py-1 rounded text-xs w-20 lg:w-24 lg:text-sm bg-red-600 text-white'>Make Admin</button>
+                    // user.role === "user" &&
+                    <button onClick={() => handleMakeAdmin(user._id)} className='py-1 rounded text-xs w-20 lg:w-24 lg:text-sm bg-red-700 text-white mr-1'>Make Admin</button>
+                  }
+               
+                  {
+                    // user.role === "user" &&
+                    <button onClick={() => handleMakeEmployee(user._id)} className='py-1 rounded text-xs w-20 lg:w-24 lg:text-sm bg-green-700 text-white mr-1'>Make Employee</button>
                   }
                 </td>
               </tr>

@@ -1,6 +1,6 @@
 const userRegister = async (user) => {
 
-    const response = await fetch(`https://rapid-home-solution-server.vercel.app/api/user/register`, {
+    const response = await fetch(`http://localhost:4000/api/user/register`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -16,7 +16,7 @@ const userRegister = async (user) => {
 
 const userLogin = async (user) => {
 
-    const response = await fetch(`https://rapid-home-solution-server.vercel.app/api/user/login`, {
+    const response = await fetch(`http://localhost:4000/api/user/login`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -33,7 +33,7 @@ const userLogin = async (user) => {
 
 
 const getUser = async () => {
-    const response = await fetch(`https://rapid-home-solution-server.vercel.app/api/user/get-user`, {
+    const response = await fetch(`http://localhost:4000/api/user/get-user`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -49,7 +49,24 @@ const getUser = async () => {
 }
 
 const getAllUsers = async () => {
-    const response = await fetch(`https://rapid-home-solution-server.vercel.app/api/user/get-all-users`, {
+    const response = await fetch(`http://localhost:4000/api/user/get-all-users`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'authorization': `Bearer ${localStorage.getItem('token')}`
+        },
+        // body: JSON.stringify(user)
+
+    })
+
+    const data = await response.json();
+    return data;
+
+}
+
+
+const getAllEmployees = async () => {
+    const response = await fetch(`http://localhost:4000/api/user/get-all-employees`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -70,7 +87,7 @@ const getAllUsers = async () => {
 
 const updateUser = async (obj) => {
 
-    const response = await fetch(`https://rapid-home-solution-server.vercel.app/api/user/update-user`, {
+    const response = await fetch(`http://localhost:4000/api/user/update-user`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -88,7 +105,7 @@ const updateUser = async (obj) => {
 
 const updateRole = async (obj) => {
 
-    const response = await fetch(`https://rapid-home-solution-server.vercel.app/api/user/update-role`, {
+    const response = await fetch(`http://localhost:4000/api/user/update-role`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -112,4 +129,21 @@ const trackingIp = async () => {
 }
 
 
-export { userRegister, userLogin, getUser, getAllUsers, updateUser, trackingIp, updateRole };
+const updateBookStatus = async (obj) => {
+
+    const response = await fetch(`http://localhost:4000/api/user/update-book-status`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'authorization': `Bearer ${localStorage.getItem("token")}`
+        },
+        body: JSON.stringify(obj)
+
+    })
+
+    const data = await response.json();
+    return data;
+}
+
+
+export { userRegister, userLogin, getUser, getAllUsers, updateUser, trackingIp, updateRole, getAllEmployees, updateBookStatus };

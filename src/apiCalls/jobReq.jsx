@@ -1,7 +1,7 @@
 
 
 const addJobReq = async (formData) => {
-    const response = await fetch(`http://localhost:4000/api/user/add-job-req`, {
+    const response = await fetch(`https://rapid-home-solution-server.vercel.app/api/user/add-job-req`, {
         method: 'POST',
         headers: {
             // 'Content-Type': 'application/json',
@@ -17,7 +17,7 @@ const addJobReq = async (formData) => {
 
 
 const getAllApplications = async () => {
-    const response = await fetch(`http://localhost:4000/api/user/get-all-applications`, {
+    const response = await fetch(`https://rapid-home-solution-server.vercel.app/api/user/get-all-applications`, {
         method: 'GET',
         headers: {
             // 'Content-Type': 'application/json',
@@ -35,7 +35,7 @@ const getAllApplications = async () => {
 
 const updateApplicationStatus = async (obj) => {
 
-    const response = await fetch(`http://localhost:4000/api/user/update-application-status`, {
+    const response = await fetch(`https://rapid-home-solution-server.vercel.app/api/user/update-application-status`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -53,7 +53,7 @@ const updateApplicationStatus = async (obj) => {
 
 
 const getApplicationsByUser = async (id) => {
-    const response = await fetch(`http://localhost:4000/api/user/get-applications-by-user/${id}`, {
+    const response = await fetch(`https://rapid-home-solution-server.vercel.app/api/user/get-applications-by-user/${id}`, {
         method: 'GET',
         headers: {
             // 'Content-Type': 'application/json',

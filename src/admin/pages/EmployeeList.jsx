@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getAllEmployees, updateBookStatus } from '../../apiCalls/users';
+import { getAllEmployees, updateBookStatus, updateEmployeeCategory } from '../../apiCalls/users';
 
 import PureModal from 'react-pure-modal';
 import { addWork } from '../../apiCalls/employees';
@@ -43,9 +43,9 @@ const EmployeeList = () => {
 
 
     useEffect(() => {
-
-        getEmployees();
         getCategories();
+        getEmployees();
+        
 
     }, [])
 
@@ -89,8 +89,8 @@ const EmployeeList = () => {
 
 
 
-        console.log(workData);
-        console.log(bookStatusData);
+        // console.log(workData);
+        // console.log(bookStatusData);
 
         setOrderId("")
         setCurrentEmployee({})
@@ -109,8 +109,11 @@ const EmployeeList = () => {
         }
     };
 
-    const handleCategoryStatus = async (employeeId, employeeCategory)=>{
-console.log(employeeId, employeeCategory);
+    const handleCategoryStatus = async (employeeId, employeeCategory) => {
+
+        await updateEmployeeCategory({employeeId, employeeCategory})
+        await getEmployees();
+      
     }
 
     return (
@@ -157,13 +160,14 @@ console.log(employeeId, employeeCategory);
 
                                     <td>{e.phone}</td>
                                     <td>
-                                        <select
+                                        { categories.length > 0 &&
+                                            <select
                                             name="category"
                                             defaultValue={e.employeeCategory}
                                             // onChange={inputHandler}
                                             className="border border-gray-400 p-2 mb-2"
                                             onChange={(element) => handleCategoryStatus(e._id, element.target.value)}
-                                            required
+                                         
                                         >
                                             <option value="" disabled>Select Category</option>
 
@@ -173,6 +177,7 @@ console.log(employeeId, employeeCategory);
                                                 ))
                                             }
                                         </select>
+                                        }
                                     </td>
                                     <th>
                                         {

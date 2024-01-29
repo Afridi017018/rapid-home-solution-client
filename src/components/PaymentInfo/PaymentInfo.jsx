@@ -59,7 +59,7 @@ const PaymentInfo = () => {
             const price = checkOutService[0].quick ? checkOutService[0].serviceId.price + ((15 / 100) * checkOutService[0].serviceId.price) : checkOutService[0].serviceId.price;
 
             console.log(price)
-            const response = await fetch('http://localhost:4000/api/orders/create-payment-intent', {
+            const response = await fetch('https://rapid-home-solution-server.vercel.app/api/orders/create-payment-intent', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -91,7 +91,7 @@ const PaymentInfo = () => {
 
                         quick: checkOutService[0].quick
                     }
-                    await fetch('http://localhost:4000/api/orders/save-order', {
+                    await fetch('https://rapid-home-solution-server.vercel.app/api/orders/save-order', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',

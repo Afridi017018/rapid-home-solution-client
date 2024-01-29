@@ -39,12 +39,12 @@ export const DASHBOARD_SIDEBAR_LINKS = [
 		path: '/admin/users',
 		icon: <HiOutlineUsers />
 	},
-	{
-		key: 'employees',
-		label: 'Employees',
-		path: '/admin/employees',
-		icon: <HiOutlineUser />
-	},
+	// {
+	// 	key: 'employees',
+	// 	label: 'Employees',
+	// 	path: '/admin/employees',
+	// 	icon: <HiOutlineUser />
+	// },
 	{
 		key: 'employee_list',
 		label: 'Employees',

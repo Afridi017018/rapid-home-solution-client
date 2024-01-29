@@ -1,6 +1,6 @@
 const getAllEmployees = async () => {
 
-    const response =await  fetch(`http://localhost:4000/api/employees/get-all-employees`, {
+    const response =await  fetch(`https://rapid-home-solution-server.vercel.app/api/employees/get-all-employees`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -18,7 +18,7 @@ const getAllEmployees = async () => {
 
 const getEmployeeById = async (id) => {
     
-        const response =await  fetch(`http://localhost:4000/api/employees/get-employee-by-id/${id}`, {
+        const response =await  fetch(`https://rapid-home-solution-server.vercel.app/api/employees/get-employee-by-id/${id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -36,7 +36,7 @@ const getEmployeeById = async (id) => {
 
 const addEmployee = async (obj) => {
 
-    const response =await  fetch(`http://localhost:4000/api/employees/add-employee`, {
+    const response =await  fetch(`https://rapid-home-solution-server.vercel.app/api/employees/add-employee`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -54,7 +54,7 @@ const addEmployee = async (obj) => {
 
 const updateEmployee = async (obj) => {
 
-    const response =await  fetch(`http://localhost:4000/api/employees/update-employee`, {
+    const response =await  fetch(`https://rapid-home-solution-server.vercel.app/api/employees/update-employee`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -72,7 +72,7 @@ const updateEmployee = async (obj) => {
 
 const deleteEmployee = async (id) => {
 
-    const response =await  fetch(`http://localhost:4000/api/employees/delete-employee/${id}`, {
+    const response =await  fetch(`https://rapid-home-solution-server.vercel.app/api/employees/delete-employee/${id}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
@@ -91,7 +91,7 @@ const deleteEmployee = async (id) => {
 
 const addWork = async (obj) => {
 
-    const response =await  fetch(`http://localhost:4000/api/work/add-work`, {
+    const response =await  fetch(`https://rapid-home-solution-server.vercel.app/api/work/add-work`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -109,7 +109,7 @@ const addWork = async (obj) => {
 
 const getWork = async (employeeId) => {
 
-    const response =await  fetch(`http://localhost:4000/api/work/get-work/${employeeId}`, {
+    const response =await  fetch(`https://rapid-home-solution-server.vercel.app/api/work/get-work/${employeeId}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -129,7 +129,7 @@ const getWork = async (employeeId) => {
 
 const getWorkHistory = async (employeeId) => {
 
-    const response =await  fetch(`http://localhost:4000/api/work/get-work-history/${employeeId}`, {
+    const response =await  fetch(`https://rapid-home-solution-server.vercel.app/api/work/get-work-history/${employeeId}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -149,7 +149,7 @@ const getWorkHistory = async (employeeId) => {
 
 const updateWork = async (obj) => {
 
-    const response =await  fetch(`http://localhost:4000/api/work/update-work`, {
+    const response =await  fetch(`https://rapid-home-solution-server.vercel.app/api/work/update-work`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',

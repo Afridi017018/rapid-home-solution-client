@@ -23,7 +23,7 @@ const AdminRoute = ({children}) => {
         }
 
         else{
-            throw error;
+            return <Navigate state={location.pathname} to="/"></Navigate>;
         }
     }
     

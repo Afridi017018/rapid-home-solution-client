@@ -37,6 +37,7 @@ const Login = () => {
 
                 const data = await getUser();
                 setUser(data.userData);
+            
                 setLoading(false);
 
 

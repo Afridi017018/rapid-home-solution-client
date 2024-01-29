@@ -107,4 +107,63 @@ const addWork = async (obj) => {
 }
 
 
-export {getAllEmployees, getEmployeeById, addEmployee, updateEmployee, deleteEmployee, addWork};
+const getWork = async (employeeId) => {
+
+    const response =await  fetch(`http://localhost:4000/api/work/get-work/${employeeId}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'authorization': `Bearer ${localStorage.getItem("token")}`
+        },
+        // body: JSON.stringify(obj)
+
+    })
+
+    const data =await  response.json();
+    return data;
+
+}
+
+
+
+
+const getWorkHistory = async (employeeId) => {
+
+    const response =await  fetch(`http://localhost:4000/api/work/get-work-history/${employeeId}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'authorization': `Bearer ${localStorage.getItem("token")}`
+        },
+        // body: JSON.stringify(obj)
+
+    })
+
+    const data =await  response.json();
+    return data;
+
+}
+
+
+
+
+const updateWork = async (obj) => {
+
+    const response =await  fetch(`http://localhost:4000/api/work/update-work`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'authorization': `Bearer ${localStorage.getItem("token")}`
+        },
+        body: JSON.stringify(obj)
+
+    })
+
+    const data =await  response.json();
+    return data;
+
+}
+
+
+
+export {getAllEmployees, getEmployeeById, addEmployee, updateEmployee, deleteEmployee, addWork, getWork, updateWork, getWorkHistory};

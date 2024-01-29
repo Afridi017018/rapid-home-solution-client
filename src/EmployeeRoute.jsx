@@ -19,11 +19,12 @@ const EmployeeRoute = ({children}) => {
     {
         if(user[0].role === "employee")
         {
+            
             return children;
         }
 
         else{
-            throw error;
+            return <Navigate state={location.pathname} to="/"></Navigate>;
         }
     }
     

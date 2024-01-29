@@ -3,6 +3,7 @@ import { getAllEmployees, updateBookStatus } from '../../apiCalls/users';
 
 import PureModal from 'react-pure-modal';
 import { addWork } from '../../apiCalls/employees';
+import { getAllCategories } from '../../apiCalls/category';
 
 
 
@@ -18,6 +19,9 @@ const EmployeeList = () => {
 
     const [currentEmployee, setCurrentEmployee] = useState({})
 
+    const [searchTerm, setSearchTerm] = useState('');
+
+    const [categories, setCategories] = useState([]);
 
 
 
@@ -27,10 +31,21 @@ const EmployeeList = () => {
         // console.log(data.usersData)
     }
 
+    const getCategories = async () => {
+
+        const data = await getAllCategories();
+
+        setCategories(data.categories);
+
+    }
+
+
+
 
     useEffect(() => {
 
         getEmployees();
+        getCategories();
 
     }, [])
 
@@ -63,8 +78,7 @@ const EmployeeList = () => {
 
         const workData = await addWork(obj);
 
-        if(!workData.success)
-        {
+        if (!workData.success) {
             setOrderIdMessage(workData.message);
             return;
         }
@@ -73,7 +87,7 @@ const EmployeeList = () => {
 
         getEmployees();
 
-        
+
 
         console.log(workData);
         console.log(bookStatusData);
@@ -84,8 +98,40 @@ const EmployeeList = () => {
     }
 
 
+    const handleSearch = () => {
+        if (searchTerm) {
+            const filteredEmployees = employees.filter((employee) =>
+                employee._id.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+            setEmployees(filteredEmployees);
+        } else {
+            getEmployees();
+        }
+    };
+
+    const handleCategoryStatus = async (employeeId, employeeCategory)=>{
+console.log(employeeId, employeeCategory);
+    }
+
     return (
         <div>
+
+            <div className="flex justify-between items-center mb-3">
+                <strong className="text-gray-700 font-medium">Employee List</strong>
+                <div className="flex items-center">
+                    <input
+                        type="text"
+                        placeholder="Search Here ..."
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        className="border mr-2 px-3 py-1 rounded w-[14rem]"
+                    />
+                    <button onClick={handleSearch} className="bg-blue-500 text-white px-3 py-1 rounded">
+                        Search
+                    </button>
+                </div>
+            </div>
+
             <div className="overflow-x-auto">
                 <table className="table">
                     {/* head */}
@@ -110,7 +156,24 @@ const EmployeeList = () => {
                                     <td>{e.name}</td>
 
                                     <td>{e.phone}</td>
-                                    <td>{e.category}</td>
+                                    <td>
+                                        <select
+                                            name="category"
+                                            defaultValue={e.employeeCategory}
+                                            // onChange={inputHandler}
+                                            className="border border-gray-400 p-2 mb-2"
+                                            onChange={(element) => handleCategoryStatus(e._id, element.target.value)}
+                                            required
+                                        >
+                                            <option value="" disabled>Select Category</option>
+
+                                            {
+                                                categories.map((category) => (
+                                                    <option key={category._id} value={category._id} > {category.name.charAt(0).toUpperCase() + category.name.slice(1)}</option>
+                                                ))
+                                            }
+                                        </select>
+                                    </td>
                                     <th>
                                         {
                                             e.employeeBookStatus === "" &&

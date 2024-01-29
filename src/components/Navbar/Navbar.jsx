@@ -64,6 +64,23 @@ const Navbar = () => {
            
 
         }
+
+{
+            user?.length > 0 &&
+            user[0]?.role === "employee" &&
+            <li><NavLink
+            to="/employee"
+            className={({ isActive, isPending }) =>
+                isPending ? "pending" : isActive ? "text-white bg-green-700 px-2 py-1 rounded" : ""
+            }
+        >
+            Dashboard
+        </NavLink></li>
+           
+
+        }
+
+
         <li className={`lg:hidden ${user?.length > 0 && 'hidden'}`}><NavLink
             to="/login"
             className={({ isActive, isPending }) =>

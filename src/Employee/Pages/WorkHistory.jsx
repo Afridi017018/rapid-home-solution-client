@@ -1,6 +1,33 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { getWorkHistory } from '../../apiCalls/employees';
+import { AuthContext } from '../../components/providers/AuthProvider';
 
 const WorkHistory = () => {
+
+
+    const { user } = useContext(AuthContext)
+    const [workHistory, setWorkHistory] = useState([])
+
+
+
+    const getHistoryWork = async () => {
+        const data = await getWorkHistory(user[0]?._id);
+        setWorkHistory(data.workHistory)
+
+    }
+
+
+
+
+    useEffect(() => {
+
+        getHistoryWork();
+
+    }, [user])
+
+
+
+
     return (
         <div>
            <div className='text-2xl font-bold text-center my-5'>
@@ -14,23 +41,30 @@ const WorkHistory = () => {
       <tr>
        
         <th>Order ID</th>
-        <th>Name</th>
-        <th>Phone</th>
+        <th>CustomerId</th>
+        <th>Customer Name</th>
         <th>Category</th>
         <th>Address</th>
       </tr>
     </thead>
     <tbody>
-      {/* row 1 */}
-      <tr>
+      {
+        workHistory.length > 0 && 
+
+        workHistory.map((e)=>(
+            <tr key={e._id}>
      
-        <td>65a575087041f39663a26db6</td>
-        <td>Zemlak, Daniel and Leannon</td>
-        
-        <td>01862409663</td>
-        <td>Plumber</td>
-        <td>Agrabad</td>
-      </tr>
+            <td>{e.orderId}</td>
+            <td>{e.userId}</td>
+            <td>{e.userName}</td>
+            
+            <td className='capitalize'>{e.category}</td>
+            <td>{e.userAddress}</td>
+
+          </tr>
+        ))
+      }
+     
       
     </tbody>
    

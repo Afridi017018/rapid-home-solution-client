@@ -10,6 +10,9 @@ import {
 } from 'react-icons/hi'
 import { FaQuestionCircle } from 'react-icons/fa';
 import { FaCommentDots } from 'react-icons/fa';
+import { CgProfile } from "react-icons/cg";
+import { MdOutlineRunningWithErrors } from "react-icons/md";
+import { FaHistory } from "react-icons/fa";
 
 export const DASHBOARD_SIDEBAR_LINKS = [
 	{
@@ -77,19 +80,19 @@ export const DASHBOARD_SIDEBAR_LINKS_EMPLOYEE = [
 		key: 'profile',
 		label: 'Profile',
 		path: '/employee',
-		icon: <FaQuestionCircle />
+		icon: <CgProfile />
 	},
 	{
 		key: 'ongoing',
 		label: 'Ongoing',
 		path: '/employee/ongoing',
-		icon: <FaQuestionCircle />
+		icon: <MdOutlineRunningWithErrors />
 	},
 	{
 		key: 'history',
 		label: 'History',
 		path: '/employee/history',
-		icon: <FaQuestionCircle />
+		icon: <FaHistory />
 	},
 ]
 
